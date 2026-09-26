@@ -1,0 +1,1451 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Tahfidz · Dashboard Internal</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="login" class="login-shell">
+  <div class="login-card">
+    <div class="login-brand">
+      <img class="login-school-logo" data-brand-logo src="../assets/tenant-logo.png" alt="Logo">
+      <div>
+        <strong style="font-size:17px" data-brand-product>Bina Tahfidz</strong>
+        <div class="school-name" data-brand-school>SMPIT Al Firdaus Purwodadi</div>
+      </div>
+    </div>
+    <h2>Selamat datang</h2>
+    <div class="subtitle">Kelola data siswa, setoran, catatan, dan monitoring hafalan <strong style="color:#2f6b57">SMPIT Al Firdaus Purwodadi</strong>.</div>
+    <div id="loginError" class="alert" style="display:none"></div>
+    <div class="field"><label>Email</label><input id="email" class="input" type="email" autocomplete="username"></div>
+    <div class="field"><label>Password</label><input id="password" class="input" type="password" autocomplete="current-password"></div>
+    <button id="loginBtn" class="btn btn-primary" style="width:100%">Masuk</button>
+    <div class="muted" style="margin-top:12px;font-size:11px">Akun internal dibuat dari Firebase Authentication.</div>
+  </div>
+</div>
+
+<div id="app" style="display:none">
+  <header class="topbar">
+    <div class="top-left">
+      <div class="brand">
+        <img class="school-logo" src="assets/logo-smpit-alfirdaus.png" alt="Logo SMPIT Al Firdaus Purwodadi">
+        <div class="brand-text"><strong data-brand-product>Bina Tahfidz</strong><small data-brand-school>SMPIT Al Firdaus Purwodadi</small></div>
+      </div>
+      <div class="breadcrumb">/ <b>Dashboard</b></div>
+    </div>
+    <div class="top-actions">
+      <div class="top-user">
+        <div class="avatar" id="userAvatar">U</div>
+        <div class="user-copy"><strong id="userName">User</strong><span>User Internal</span></div>
+      </div>
+      <button class="account-btn" id="accountBtn" title="Akun Saya">
+        <span class="account-icon">⚙</span>
+        <span>Akun</span>
+      </button>
+      <button class="logout-btn" id="logoutBtn" title="Keluar dari aplikasi">
+        <span class="logout-icon">↪</span>
+        <span>Keluar</span>
+      </button>
+    </div>
+  </header>
+
+  <div class="layout">
+    <aside class="sidebar">
+    <div class="sidebar-brand">
+      <img class="sidebar-school-logo" src="assets/logo-smpit-alfirdaus.png" alt="Logo SMPIT Al Firdaus Purwodadi">
+      <div><strong data-brand-product>Bina Tahfidz</strong><span data-brand-school>SMPIT Al Firdaus Purwodadi</span></div>
+    </div>
+
+    <div class="nav-group-title">Menu Utama</div>
+    <button class="navbtn active" data-page="dashboard"><span class="navicon" data-icon="layout-dashboard"></span><span class="navtext">Dashboard</span></button>
+    <button class="navbtn" data-page="siswa"><span class="navicon" data-icon="users"></span><span class="navtext">Data Siswa</span></button>
+    <button class="navbtn" data-page="setoran"><span class="navicon" data-icon="book-open-check"></span><span class="navtext">Setoran</span></button>
+    <button class="navbtn" data-page="juziyah">
+      <span class="navicon" data-icon="award"></span>
+      <span class="navtext">Juziyah</span>
+    </button>
+    <button class="navbtn" data-page="catatan"><span class="navicon" data-icon="message-square-text"></span><span class="navtext">Catatan</span></button>
+    <button class="navbtn" data-page="monitoring"><span class="navicon" data-icon="chart-no-axes-combined"></span><span class="navtext">Monitoring</span></button>
+    <button class="navbtn" data-page="laporan">
+      <span class="navicon" data-icon="file-chart-column"></span>
+      <span class="navtext">Laporan</span>
+    </button>
+    <button class="navbtn" data-page="rapor">
+      <span class="navicon" data-icon="file-badge"></span>
+      <span class="navtext">Rapor</span>
+    </button>
+  </aside>
+
+    <main class="content">
+      <section id="page-dashboard" class="page">
+        <div class="page-head">
+          <div>
+            <div class="eyebrow">Ringkasan Seluruh Siswa</div>
+            <h1>Dashboard <span data-brand-product>Bina Tahfidz</span></h1>
+            <p>Gambaran perkembangan hafalan seluruh siswa <span data-brand-school>SMPIT Al Firdaus Purwodadi</span>.</p>
+          </div>
+          <button class="btn btn-light" onclick="loadAll()">↻ Refresh</button>
+        </div>
+
+        <div class="hero">
+          <div class="hero-top">
+            <div>
+              <div class="hero-note">ASSALAMUALAIKUM WARAHMATULLAHI WABARAKATUH</div>
+              <h2>Monitoring Hafalan Siswa</h2>
+              <div style="font-size:11px;color:#d9eee2;font-weight:700">SMPIT Al Firdaus Purwodadi</div>
+              <p>Semua statistik di halaman ini dihitung dari seluruh siswa dan seluruh riwayat setoran.</p>
+            </div>
+            <div class="quick-stats">
+              <div class="quick-stat"><span>Siswa Aktif</span><strong id="heroStudents">0</strong></div>
+              <div class="quick-stat"><span>Setor Hari Ini</span><strong id="heroToday">0</strong></div>
+              <div class="quick-stat"><span>Belum Setor</span><strong id="heroNoToday">0</strong></div>
+              <div class="quick-stat"><span>Total Setoran</span><strong id="heroSetoran">0</strong></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="stats">
+          <div class="stat">
+            <div class="stat-icon green">👥</div>
+            <div><div class="label">SISWA AKTIF</div><div id="stStudents" class="n">0</div><div class="hint">Seluruh kelas</div></div>
+          </div>
+          <div class="stat">
+            <div class="stat-icon gold">✓</div>
+            <div><div class="label">SETORAN HARI INI</div><div id="stToday" class="n">0</div><div class="hint">Siswa yang sudah setor</div></div>
+          </div>
+          <div class="stat">
+            <div class="stat-icon blue">○</div>
+            <div><div class="label">BELUM SETOR HARI INI</div><div id="stNoToday" class="n">0</div><div class="hint">Siswa aktif tanpa setoran hari ini</div></div>
+          </div>
+          <div class="stat">
+            <div class="stat-icon rose">↻</div>
+            <div><div class="label">MENGULANG TERBARU</div><div id="stMengulang" class="n">0</div><div class="hint">Berdasarkan setoran terakhir</div></div>
+          </div>
+        </div>
+
+        <div class="grid-main">
+          <div>
+            <div class="card">
+              <div class="cardhead">
+                <div><div class="cardtitle">Status Setoran Hari Ini</div><div class="cardsub">Perbandingan seluruh siswa aktif.</div></div>
+                <button class="link-btn" onclick="document.querySelector('[data-page=&quot;setoran&quot;]').click()">Input Setoran →</button>
+              </div>
+              <div class="whole-status">
+                <div class="whole-status-kpi">
+                  <div class="whole-status-number" id="dashTodayPercent">0%</div>
+                  <div class="muted">siswa aktif sudah setor</div>
+                </div>
+                <div class="whole-status-bar"><span id="dashTodayBar"></span></div>
+                <div class="whole-status-foot">
+                  <span><b id="dashTodayDone">0</b> sudah setor</span>
+                  <span><b id="dashTodayNot">0</b> belum setor</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="cardhead">
+                <div><div class="cardtitle">Setoran Terbaru</div><div class="cardsub">Aktivitas terbaru dari seluruh siswa.</div></div>
+                <button class="link-btn" onclick="document.querySelector('[data-page=&quot;setoran&quot;]').click()">Lihat tabel →</button>
+              </div>
+              <div id="latestSetoran"><div class="empty">Belum ada data.</div></div>
+            </div>
+          </div>
+
+          <div>
+            <div class="card">
+              <div class="cardhead">
+                <div><div class="cardtitle">Distribusi Kelas</div><div class="cardsub">Jumlah siswa aktif per kelas.</div></div>
+              </div>
+              <div id="dashClasses" class="class-stats"></div>
+            </div>
+
+            <div class="card">
+              <div class="cardhead">
+                <div><div class="cardtitle">Ringkasan Status Terakhir</div><div class="cardsub">Status setoran terakhir masing-masing siswa.</div></div>
+              </div>
+              <div class="legend" style="margin-top:0">
+                <div class="legend-row"><div class="legend-left"><span class="dot" style="background:#2f805f"></span>Lancar</div><strong id="legendLancar">0</strong></div>
+                <div class="legend-row"><div class="legend-left"><span class="dot" style="background:#d3a54f"></span>Mengulang</div><strong id="legendMengulang">0</strong></div>
+                <div class="legend-row"><div class="legend-left"><span class="dot" style="background:#ccd5d0"></span>Belum ada setoran</div><strong id="legendBelum">0</strong></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="page-siswa" class="page hidden">
+        <div class="compact-head">
+          <div>
+            <div class="eyebrow">Database</div>
+            <h1>Data Siswa</h1>
+            <p>Kelola seluruh murid dan status keaktifannya.</p>
+          </div>
+          <button class="btn btn-primary" onclick="openStudentModal()">＋ Tambah Siswa</button>
+        </div>
+        <div class="card compact-card">
+          <div class="data-toolbar">
+            <div class="data-search">
+              <div class="search-icon">⌕</div>
+              <input id="studentSearch" class="input" placeholder="Cari nama atau NIS" oninput="renderStudents()">
+            </div>
+            <select id="studentClassFilter" class="input filter-input" onchange="renderStudents()"><option value="ALL">Semua kelas</option></select>
+            <div class="tool-actions">
+              <button class="btn btn-primary" onclick="openStudentModal()">＋ Tambah</button>
+              <button class="btn btn-light" id="studentEditModeBtn" onclick="toggleStudentEditMode()">✎ Edit Tabel</button>
+              <button class="btn btn-light" onclick="openStudentClassManager()">↔ Pindah Kelas</button>
+              <button class="btn btn-light" onclick="promoteSelectedStudents()">↑ Naik Kelas</button>
+              <button class="btn btn-light" onclick="graduateSelectedStudents()">✓ Lulus</button>
+              <button class="btn btn-light" onclick="openImportModal('siswa')">⇩ Import / Tempel</button>
+              <button class="btn btn-light" onclick="exportData('siswa')">⇧ Export</button>
+              <button class="btn btn-red bulk-delete-btn" id="deleteSelectedStudentsBtn" onclick="deleteSelectedStudents()">Hapus Terpilih</button>
+            </div>
+          </div>
+          <div class="helper-note">Bisa <b>copy-paste langsung dari Excel/Google Sheets</b>, import CSV, atau edit beberapa siswa sekaligus seperti spreadsheet.</div>
+          <div class="tablewrap"><table><thead><tr><th class="check-col"><input type="checkbox" id="selectAllStudents" onchange="toggleSelectAllStudents(this.checked)"></th><th>NIS</th><th>Nama</th><th>Kelas</th><th>Status</th><th>Aksi</th></tr></thead><tbody id="studentTable"></tbody></table></div>
+        </div>
+      </section>
+
+      <section id="page-setoran" class="page hidden">
+        <div class="compact-head">
+          <div>
+            <div class="eyebrow">Input Hafalan</div>
+            <h1>Setoran Siswa</h1>
+            <p>Satu baris untuk satu siswa. Kolom di kanan berisi setoran terakhir dan bisa diedit langsung.</p>
+          </div>
+          <div class="tool-actions">
+            <button class="btn btn-light" id="setoranEditModeBtn" onclick="toggleSetoranEditMode()">✎ Edit Tabel</button>
+            <button class="btn btn-primary setoran-save-hidden" id="setoranSaveChangesBtn" onclick="saveAllInlineSetoran()">✓ Simpan Perubahan</button>
+          </div>
+        </div>
+
+        <div class="card compact-card">
+          <div class="setoran-toolbar">
+            <div class="data-search">
+              <div class="search-icon">⌕</div>
+              <input id="setoranStudentSearch" class="input" placeholder="Cari nama atau NIS" oninput="renderStudentSetoranGrid()">
+            </div>
+            <select id="setoranClassFilter" class="input filter-input" onchange="renderStudentSetoranGrid()">
+              <option value="ALL">Semua kelas</option>
+            </select>
+            <input id="setoranTanggalCepat" class="input date-quick" type="date" onchange="renderStudentSetoranGrid()">
+            <div class="tool-actions">
+              <button class="btn btn-light" onclick="openBulkSetoranPasteModal()">📋 Tempel Banyak</button>
+              <button class="btn btn-light" onclick="exportStudentSetoranGrid()">⇧ Export</button>
+            </div>
+          </div>
+
+          <div class="setoran-guide">
+            <span><b>Mode baca:</b> tabel aman dari perubahan tidak sengaja.</span>
+            <span><b>Mode edit:</b> tekan <b>Edit Tabel</b> lalu ubah setoran.</span>
+          </div>
+
+          <div class="spreadsheet-wrap">
+            <table class="spreadsheet-table">
+              <thead>
+                <tr>
+                  <th class="sticky-col sticky-nis">NIS</th>
+                  <th class="sticky-col sticky-name">NAMA SISWA</th>
+                  <th>KELAS</th>
+                  <th>SURAH TERAKHIR</th>
+                  <th>AYAT</th>
+                  <th>STATUS</th>
+                  <th>TANGGAL</th>
+                  <th>RIWAYAT</th>
+                </tr>
+              </thead>
+              <tbody id="studentSetoranGrid"></tbody>
+            </table>
+          </div>
+          <div id="studentSetoranMobile" class="mobile-student-list"></div>
+        </div>
+      </section>
+
+      
+      <section id="page-juziyah" class="page hidden">
+        <div class="compact-head">
+          <div>
+            <div class="eyebrow">Uji Hafalan</div>
+            <h1>Juziyah</h1>
+            <p>Kelola hasil ujian Juziyah siswa dan terbitkan sertifikat bagi siswa yang dinyatakan lulus.</p>
+          </div>
+          <div class="tool-actions">
+            <button class="btn btn-light" onclick="openJuziyahModal()">＋ Tambah Hasil</button>
+            <button class="btn btn-light" onclick="refreshJuziyah()">↻ Refresh</button>
+          </div>
+        </div>
+
+        <div class="stats juziyah-stats">
+          <div class="stat">
+            <div class="stat-icon green">✓</div>
+            <div><div class="label">LULUS</div><div id="jzLulus">0</div><div class="hint">hasil Juziyah</div></div>
+          </div>
+          <div class="stat">
+            <div class="stat-icon gold">○</div>
+            <div><div class="label">BELUM LULUS</div><div id="jzBelumLulus">0</div><div class="hint">perlu pembinaan</div></div>
+          </div>
+          <div class="stat">
+            <div class="stat-icon blue">👥</div>
+            <div><div class="label">SISWA DIUJI</div><div id="jzSiswaDiuji">0</div><div class="hint">siswa unik</div></div>
+          </div>
+          <div class="stat">
+            <div class="stat-icon rose">🏆</div>
+            <div><div class="label">SERTIFIKAT</div><div id="jzSertifikat">0</div><div class="hint">dapat dicetak</div></div>
+          </div>
+        </div>
+
+        <div class="card compact-card">
+          <div class="juziyah-toolbar">
+            <div class="data-search">
+              <div class="search-icon">⌕</div>
+              <input id="juziyahSearch" class="input" placeholder="Cari nama, NIS, atau juz" oninput="renderJuziyah()">
+            </div>
+            <select id="juziyahClassFilter" class="input filter-input" onchange="renderJuziyah()">
+              <option value="ALL">Semua kelas</option>
+            </select>
+            <select id="juziyahStatusFilter" class="input filter-input" onchange="renderJuziyah()">
+              <option value="ALL">Semua hasil</option>
+              <option value="Lulus">Lulus</option>
+              <option value="Belum Lulus">Belum Lulus</option>
+            </select>
+            <button class="btn btn-light" onclick="exportJuziyahExcel()">⇩ Excel</button>
+          </div>
+
+          <div class="helper-note">
+            <b>Satu baris untuk satu siswa.</b> Semua Juz yang pernah diuji ditampilkan di satu baris; kolom kanan menampilkan hasil Juziyah terakhir.
+            Satu siswa boleh memiliki banyak riwayat Juziyah karena dapat diuji pada Juz yang berbeda sesuai perkembangan hafalannya.
+            <b>Riwayat</b> tetap menyimpan seluruh hasil ujian.
+          </div>
+
+          <div class="spreadsheet-wrap juziyah-table-wrap">
+            <table class="spreadsheet-table juziyah-table">
+              <thead>
+                <tr>
+                  <th>NIS</th>
+                  <th>NAMA SISWA</th>
+                  <th>KELAS</th>
+                  <th>JUZ TERAKHIR</th>
+                  <th>TANGGAL</th>
+                  <th>NILAI</th>
+                  <th>HASIL</th>
+                  <th>CATATAN TERAKHIR</th>
+                  <th>RIWAYAT</th>
+                </tr>
+              </thead>
+              <tbody id="juziyahTable"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="card compact-card juziyah-certificate-info">
+          <div class="cardhead">
+            <div>
+              <div class="cardtitle">Sertifikat Juziyah</div>
+              <div class="cardsub">Format sementara A4. Akan disesuaikan setelah sekolah memberikan format resmi.</div>
+            </div>
+          </div>
+          <div class="juziyah-cert-info-grid">
+            <div><strong>Judul</strong><span>SERTIFIKAT JUZIYAH</span></div>
+            <div><strong>Penerima</strong><span>Nama, NIS, Kelas</span></div>
+            <div><strong>Pencapaian</strong><span>Juz yang dinyatakan lulus</span></div>
+            <div><strong>Tanggal</strong><span>Tanggal hasil Juziyah</span></div>
+            <div><strong>Pengesahan</strong><span>Guru Tahfidz / pihak sekolah</span></div>
+          </div>
+        </div>
+      </section>
+
+      <div id="juziyahModal" class="modal hidden" data-close-on-overlay="true">
+        <div class="modalbox">
+          <div class="modal-title-row">
+            <div>
+              <div class="eyebrow">Uji Hafalan</div>
+              <h3 id="juziyahModalTitle" style="margin:3px 0 4px">Tambah Hasil Juziyah</h3>
+              <div class="muted">Format ini bersifat sementara.</div>
+            </div>
+            <button class="btn btn-light" onclick="closeModal('juziyahModal')">Tutup</button>
+          </div>
+
+          <input type="hidden" id="juziyahId">
+          <input type="hidden" id="juziyahSessionId">
+
+          <div class="form-grid">
+            <div class="field">
+              <label>Siswa</label>
+              <select id="juziyahNis" class="input"></select>
+            </div>
+            <div class="field field-full">
+              <label>Juz yang Diujikan</label>
+              <div id="juziyahJuzGrid" class="juziyah-juz-grid"></div>
+              <div class="muted" style="margin-top:5px">Untuk satu sesi, guru dapat memilih beberapa Juz sekaligus. Semua Juz terpilih akan memiliki ID sesi yang sama sehingga sertifikatnya menjadi satu pencapaian.</div>
+            </div>
+            <div class="field">
+              <label>Tanggal</label>
+              <input id="juziyahTanggal" class="input" type="date">
+            </div>
+            <div class="field">
+              <label>Nilai (opsional)</label>
+              <input id="juziyahNilai" class="input" type="number" min="0" max="100" placeholder="Contoh: 86">
+            </div>
+            <div class="field">
+              <label>Hasil</label>
+              <select id="juziyahHasil" class="input">
+                <option value="Lulus">Lulus</option>
+                <option value="Belum Lulus">Belum Lulus</option>
+              </select>
+            </div>
+            <div class="field field-full">
+              <label>Catatan</label>
+              <textarea id="juziyahCatatan" class="input" rows="4" placeholder="Catatan hasil ujian / pembinaan..."></textarea>
+            </div>
+          </div>
+
+          <div class="modal-actions">
+            <button class="btn btn-light" onclick="closeModal('juziyahModal')">Batal</button>
+            <button class="btn btn-primary" onclick="saveJuziyah()">Simpan</button>
+          </div>
+        </div>
+      
+      <div id="juziyahCertificatePickerModal" class="modal hidden" data-close-on-overlay="true">
+        <div class="modalbox">
+          <div class="modal-title-row">
+            <div>
+              <div class="eyebrow">Sertifikat Juziyah</div>
+              <h3 style="margin:3px 0 4px">Pilih Pencapaian</h3>
+              <div class="muted">Semua sesi Juziyah yang lulus tetap tersedia untuk dicetak ulang.</div>
+            </div>
+            <button class="btn btn-light" onclick="closeModal('juziyahCertificatePickerModal')">Tutup</button>
+          </div>
+          <div id="juziyahCertificatePickerList" class="juziyah-session-list"></div>
+        </div>
+      </div>
+
+      <div id="juziyahCertificatePreviewModal" class="modal hidden" data-close-on-overlay="false">
+        <div class="modalbox juziyah-preview-modal">
+          <div class="modal-title-row">
+            <div>
+              <div class="eyebrow">Pratinjau Sertifikat</div>
+              <h3 style="margin:3px 0 4px">Sertifikat Juziyah</h3>
+              <div class="muted">Tinjau pencapaian sebelum mencetak PDF A4.</div>
+            </div>
+            <button class="btn btn-light" onclick="closeModal('juziyahCertificatePreviewModal')">Tutup</button>
+          </div>
+          <div id="juziyahCertificatePreview" class="juziyah-certificate-preview"></div>
+          <div class="modal-actions">
+            <button class="btn btn-light" onclick="closeModal('juziyahCertificatePreviewModal')">Kembali</button>
+            <button class="btn btn-primary" onclick="printCurrentJuziyahCertificate()">Cetak PDF A4</button>
+          </div>
+        </div>
+      </div>
+
+</div>
+
+<section id="page-catatan" class="page hidden">
+        <div class="compact-head">
+          <div>
+            <div class="eyebrow">Pembinaan Siswa</div>
+            <h1>Catatan Guru</h1>
+            <p>Satu baris untuk satu siswa. Catatan terakhir ditampilkan, seluruh riwayat tetap tersedia.</p>
+          </div>
+          <div class="tool-actions">
+            <button class="btn btn-primary" onclick="openCatatanModal()">＋ Tambah Catatan</button>
+          </div>
+        </div>
+
+        <div class="card compact-card">
+          <div class="data-toolbar">
+            <div class="data-search">
+              <div class="search-icon">⌕</div>
+              <input id="catatanSearch" class="input" placeholder="Cari nama, NIS, atau isi catatan" oninput="renderStudentCatatanGrid()">
+            </div>
+            <select id="catatanClassFilter" class="input filter-input" onchange="renderStudentCatatanGrid()">
+              <option value="ALL">Semua kelas</option>
+            </select>
+            <div class="tool-actions">
+              <button class="btn btn-light" id="catatanEditModeBtn" onclick="toggleCatatanEditMode()">✎ Edit Tabel</button>
+              <button class="btn btn-primary" id="catatanSaveChangesBtn" onclick="saveAllInlineCatatan()">✓ Simpan Perubahan</button>
+              
+              <button class="btn btn-light" onclick="openBulkCatatanPasteModal()">📋 Tempel Banyak</button>
+              <button class="btn btn-light" onclick="exportStudentCatatanGrid()">⇧ Export</button>
+            </div>
+          </div>
+
+          <div class="helper-note">
+            <b>Catatan terakhir</b> tampil di setiap siswa. Klik <b>Edit Tabel</b> untuk mengubah catatan/saran langsung di tabel.
+            <b>Riwayat</b> tetap berisi seluruh catatan dan konteks setoran.
+          </div>
+
+          <div class="spreadsheet-wrap catatan-spreadsheet-wrap">
+            <table class="spreadsheet-table catatan-spreadsheet">
+              <colgroup>
+                <col class="cat-col-nis">
+                <col class="cat-col-name">
+                <col class="cat-col-class">
+                <col class="cat-col-note">
+                <col class="cat-col-advice">
+                <col class="cat-col-ref">
+                <col class="cat-col-date">
+                <col class="cat-col-actions">
+              </colgroup>
+              <thead>
+                <tr>
+                  <th class="sticky-col sticky-nis">NIS</th>
+                  <th class="sticky-col sticky-name">NAMA SISWA</th>
+                  <th>KELAS</th>
+                  <th>CATATAN TERAKHIR</th>
+                  <th>SARAN ORANG TUA</th>
+                  <th>SETORAN TERKAIT</th>
+                  <th>TANGGAL</th>
+                  <th>RIWAYAT</th>
+                </tr>
+              </thead>
+              <tbody id="studentCatatanGrid"></tbody>
+            </table>
+          </div>
+          <div id="studentCatatanMobile" class="mobile-student-list"></div>
+        </div>
+      </section>
+
+      <section id="page-monitoring" class="page hidden">
+        <div class="compact-head">
+          <div>
+            <div class="eyebrow">Pengawasan Setoran</div>
+            <h1>Monitoring Setoran</h1>
+            <p>Pantau siapa yang sudah setor pada tanggal tertentu, siapa yang belum setor, dan capaian ayatnya.</p>
+          </div>
+          <div class="tool-actions">
+            <button class="btn btn-light" onclick="exportMonitoringCurrentDate()">⇩ Excel Hari Ini</button>
+            <button class="btn btn-primary" onclick="exportMonitoringRange()">⇩ Excel Periode</button>
+          </div>
+        </div>
+
+        <div class="card compact-card monitoring-filter-card">
+          <div class="monitoring-filters">
+            <div class="monitoring-filter">
+              <label for="monitoringDate">Tanggal Monitoring</label>
+              <input id="monitoringDate" class="input" type="date" onchange="renderMonitoring()">
+            </div>
+            <div class="monitoring-filter">
+              <label for="monitoringStartDate">Mulai Riwayat</label>
+              <input id="monitoringStartDate" class="input" type="date" onchange="renderMonitoringRange()">
+            </div>
+            <div class="monitoring-filter">
+              <label for="monitoringEndDate">Sampai</label>
+              <input id="monitoringEndDate" class="input" type="date" onchange="renderMonitoringRange()">
+            </div>
+            <div class="monitoring-filter">
+              <label for="monitoringClassFilter">Kelas</label>
+              <select id="monitoringClassFilter" class="input" onchange="renderMonitoring()">
+                <option value="ALL">Semua kelas</option>
+              </select>
+            </div>
+            <div class="monitoring-filter monitoring-search">
+              <label for="monitoringSearch">Cari siswa</label>
+              <input id="monitoringSearch" class="input" placeholder="Nama atau NIS" oninput="renderMonitoring()">
+            </div>
+          </div>
+        </div>
+
+        <div class="stats monitoring-stats">
+          <div class="stat">
+            <div class="stat-icon green">✓</div>
+            <div><div class="label">SUDAH SETOR</div><div id="monDone">0</div><div class="hint" id="monDoneHint">pada tanggal terpilih</div></div>
+          </div>
+          <div class="stat">
+            <div class="stat-icon gold">○</div>
+            <div><div class="label">BELUM SETOR</div><div id="monNotDone">0</div><div class="hint">tidak ada setoran tercatat</div></div>
+          </div>
+          <div class="stat">
+            <div class="stat-icon blue">%</div>
+            <div><div class="label">PERSENTASE SETOR</div><div id="monPercent">0%</div><div class="hint">dari siswa aktif</div></div>
+          </div>
+          <div class="stat">
+            <div class="stat-icon rose">⚑</div>
+            <div><div class="label">MENGULANG</div><div id="monMengulang">0</div><div class="hint">pada tanggal terpilih</div></div>
+          </div>
+        </div>
+
+        <div class="card compact-card monitoring-table-card">
+          <div class="monitoring-tabs" role="tablist" aria-label="Mode Monitoring Setoran">
+            <button class="monitoring-tab active" id="monitorTabTanggal" role="tab"
+              aria-selected="true" onclick="switchMonitoringTab('tanggal')">
+              <span class="monitoring-tab-title">Tanggal Terpilih</span>
+              <span class="monitoring-tab-sub">Siapa sudah setor &amp; capaian ayat</span>
+            </button>
+            <button class="monitoring-tab" id="monitorTabRiwayat" role="tab"
+              aria-selected="false" onclick="switchMonitoringTab('riwayat')">
+              <span class="monitoring-tab-title">Riwayat Periode</span>
+              <span class="monitoring-tab-sub">Pantau pola setoran antar hari</span>
+            </button>
+          </div>
+
+          <section id="monitorPanelTanggal" class="monitoring-panel active">
+            <div class="cardhead monitoring-table-head">
+              <div>
+                <div class="cardtitle">Setoran pada Tanggal Terpilih</div>
+                <div class="cardsub">Seluruh siswa tetap ditampilkan agar mudah melihat siapa yang belum setor.</div>
+              </div>
+              <div class="legend-inline">
+                <span class="monitor-chip monitor-chip-done">✓ Sudah setor</span>
+                <span class="monitor-chip monitor-chip-pending">— Belum setor</span>
+              </div>
+            </div>
+
+            <div class="spreadsheet-wrap monitoring-table-wrap mobile-table-shell">
+              <table class="spreadsheet-table monitoring-current-table">
+                <thead>
+                  <tr>
+                    <th class="sticky-col sticky-nis">NIS</th>
+                    <th class="sticky-col sticky-name">NAMA SISWA</th>
+                    <th>KELAS</th>
+                    <th>STATUS SETOR</th>
+                    <th>SURAH</th>
+                    <th>AYAT</th>
+                    <th>STATUS HAFALAN</th>
+                    <th>LIHAT PERKEMBANGAN</th>
+                  </tr>
+                </thead>
+                <tbody id="monitoringCurrentTable"></tbody>
+              </table>
+            </div>
+          </section>
+
+          <section id="monitorPanelRiwayat" class="monitoring-panel hidden">
+            <div class="cardhead monitoring-table-head">
+              <div>
+                <div class="cardtitle">Riwayat Setoran per Tanggal</div>
+                <div class="cardsub">Kolom tanggal menunjukkan apakah siswa setor dan sampai ayat berapa.</div>
+              </div>
+              <div class="muted" id="monitoringRangeLabel"></div>
+            </div>
+
+            <div class="spreadsheet-wrap monitoring-table-wrap mobile-table-shell">
+              <table class="spreadsheet-table monitoring-range-table">
+                <thead id="monitoringRangeHead"></thead>
+                <tbody id="monitoringRangeTable"></tbody>
+              </table>
+            </div>
+          </section>
+        </div>
+      </section>
+
+      <div id="studentModal" class="modal hidden" data-close-on-overlay="true">
+  <div class="modalbox">
+    <div class="cardhead"><h3 id="studentModalTitle" style="margin:0">Tambah Siswa</h3><button class="btn btn-light" onclick="closeModal('studentModal')">Tutup</button></div>
+    <input type="hidden" id="studentOriginalNis">
+    <div class="grid2">
+      <div class="field"><label>NIS</label><input id="studentNis" class="input" type="text"></div>
+      <div class="field"><label>Kelas</label><input id="studentKelas" class="input" type="text" placeholder="7A"></div>
+    </div>
+    <div class="field"><label>Nama Siswa</label><input id="studentNama" class="input" type="text"></div>
+    <div class="field"><label>Status Siswa</label><select id="studentAktif" class="input"><option value="true">Aktif</option><option value="false">Nonaktif</option></select>
+      <div class="muted" id="studentStatusHint" style="margin-top:5px">Siswa aktif mengikuti pembinaan.</div>
+    </div>
+    <div style="display:flex;gap:8px;justify-content:flex-end"><button class="btn btn-light" onclick="closeModal('studentModal')">Batal</button><button class="btn btn-primary" onclick="saveStudent()">Simpan</button></div>
+  </div>
+</div>
+
+<div id="studentClassManagerModal" class="modal hidden" data-close-on-overlay="true">
+  <div class="modalbox student-class-manager">
+    <div class="cardhead">
+      <div>
+        <h3 style="margin:0">Manajemen Kelas Siswa</h3>
+        <div class="muted" style="margin-top:4px">Pindah kelas, naik kelas, atau tandai lulus.</div>
+      </div>
+      <button class="btn btn-light" onclick="closeModal('studentClassManagerModal')">Tutup</button>
+    </div>
+    <div id="classManagerSelected" class="class-manager-selected"></div>
+    <div class="class-manager-ops">
+      <button type="button" class="class-manager-op active" data-op="pindah" onclick="setStudentClassOperation('pindah')">
+        <strong>↔ Pindah Kelas</strong><span>Pilih kelas tujuan.</span>
+      </button>
+      <button type="button" class="class-manager-op" data-op="naik" onclick="setStudentClassOperation('naik')">
+        <strong>↑ Naik Kelas</strong><span>Otomatis menaikkan tingkat.</span>
+      </button>
+      <button type="button" class="class-manager-op" data-op="lulus" onclick="setStudentClassOperation('lulus')">
+        <strong>✓ Lulus</strong><span>Menandai siswa telah lulus.</span>
+      </button>
+    </div>
+    <div id="classManagerTargetWrap" class="field">
+      <label for="classManagerTargetClass">Kelas Tujuan</label>
+      <input id="classManagerTargetClass" class="input" type="text" placeholder="Contoh: 8A">
+      <div class="muted" style="margin-top:5px">Untuk beberapa siswa, kelas tujuan diterapkan ke semuanya.</div>
+    </div>
+    <div id="classManagerPreview" class="class-manager-preview"></div>
+    <div class="modal-actions">
+      <button class="btn btn-light" onclick="closeModal('studentClassManagerModal')">Batal</button>
+      <button class="btn btn-primary" onclick="applyStudentClassOperation()">Simpan Perubahan</button>
+    </div>
+  </div>
+</div>
+
+<div id="setoranModal" class="modal hidden" data-close-on-overlay="true">
+  <div class="modalbox">
+    <div class="cardhead"><h3 id="setoranModalTitle" style="margin:0">Setoran Hafalan</h3><button class="btn btn-light" onclick="closeModal('setoranModal')">Tutup</button></div>
+    <input type="hidden" id="setoranId">
+    <div class="field"><label>Siswa</label><select id="setoranNis" class="input"></select></div>
+    <div class="grid2">
+      <div class="field"><label for="setoranSurah">Surah</label><select id="setoranSurah" class="input" aria-label="Pilih surah"></select></div>
+      <div class="field"><label>Ayat Terakhir</label><input id="setoranAyat" class="input" type="number" min="1"></div>
+    </div>
+    <div class="grid2">
+      <div class="field"><label>Status</label><select id="setoranStatus" class="input"><option>Lancar</option><option>Mengulang</option></select></div>
+      <div class="field"><label>Tanggal Setoran</label><input id="setoranTanggal" class="input" type="date"></div>
+    </div>
+    <div style="display:flex;gap:8px;justify-content:flex-end"><button class="btn btn-light" onclick="closeModal('setoranModal')">Batal</button><button class="btn btn-primary" onclick="saveSetoran()">Simpan</button></div>
+  </div>
+</div>
+
+<div id="catatanModal" class="modal hidden" data-close-on-overlay="true">
+  <div class="modalbox">
+    <div class="cardhead"><h3 id="catatanModalTitle" style="margin:0">Catatan untuk Orang Tua</h3><button class="btn btn-light" onclick="closeModal('catatanModal')">Tutup</button></div>
+    <input type="hidden" id="catatanId">
+    <div class="field"><label>Siswa</label><select id="catatanNis" class="input"></select></div>
+    <div class="field"><label>Catatan Guru</label><textarea id="catatanPesan" class="input" rows="4" placeholder="Contoh: Hafalan masih perlu diperbanyak murojaah."></textarea></div>
+    <div class="field"><label>Saran untuk Orang Tua</label><textarea id="catatanSaran" class="input" rows="4" placeholder="Contoh: Mohon lebih sering menyimak murojaah di rumah."></textarea></div>
+    <div class="field">
+      <label>Referensi Setoran</label>
+      <select id="catatanSetoranRef" class="input note-reference-select"></select>
+      <div id="catatanReferencePreview" class="note-preview-box" style="margin-top:8px">Catatan ini belum direferensikan ke setoran.</div>
+    </div>
+    <div class="field"><label>Tanggal</label><input id="catatanTanggal" class="input" type="date"></div>
+    <div style="display:flex;gap:8px;justify-content:flex-end"><button class="btn btn-light" onclick="closeModal('catatanModal')">Batal</button><button class="btn btn-primary" onclick="saveCatatan()">Simpan</button></div>
+  </div>
+</div>
+
+<div id="bulkSetoranModal" class="modal hidden" data-close-on-overlay="true">
+  <div class="modalbox import-box bulk-setoran-modal">
+    <div class="modal-title-row">
+      <div>
+        <div class="eyebrow">Input Massal</div>
+        <h3 style="margin:3px 0 4px">Tempel Setoran Banyak</h3>
+        <div class="muted">Format sudah disiapkan agar guru tinggal mengisi setoran pada siswa yang diperlukan.</div>
+      </div>
+      <button class="btn btn-light" onclick="closeModal('bulkSetoranModal')">Tutup</button>
+    </div>
+
+    <div class="bulk-template-actions">
+      <button class="btn btn-light" onclick="downloadSetoranTemplate()">⇩ Download Template</button>
+      <span class="muted">Unduh template Excel, pilih Surah dan Status dari dropdown, isi Ayat dan Tanggal, lalu copy seluruh tabel dan paste ke sini.</span>
+    </div>
+
+    <div class="helper-note">
+      Format kolom: <b>NIS | Nama Siswa | Surah | Ayat | Status | Tanggal</b>.
+      <b>Nama hanya untuk membantu guru</b> dan tidak digunakan sebagai index maupun untuk memperbarui nama siswa.
+    </div>
+
+    <textarea id="bulkSetoranText" class="input import-textarea" rows="12"
+      placeholder="NIS&#9;Nama Siswa&#9;Surah&#9;Ayat&#9;Status&#9;Tanggal&#10;260001&#9;Ahmad Fauzan&#9;An-Naba'&#9;20&#9;Lancar&#9;22/08/2026"></textarea>
+
+    <div id="bulkSetoranPreview" class="import-preview">Template akan terlihat di sini setelah ditempel atau diisi.</div>
+
+    <div class="import-foot">
+      <div class="muted">Tanggal boleh dikosongkan — sistem otomatis memakai tanggal hari ini. Baris siswa yang seluruh kolom setoran masih kosong akan dilewati. NIS tetap menjadi identitas utama.</div>
+      <div style="display:flex;gap:8px">
+        <button class="btn btn-light" onclick="closeModal('bulkSetoranModal')">Batal</button>
+        <button class="btn btn-primary" onclick="saveBulkSetoran()">Simpan Semua</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="bulkCatatanModal" class="modal hidden" data-close-on-overlay="true">
+  <div class="modalbox import-box bulk-setoran-modal">
+    <div class="modal-title-row">
+      <div>
+        <div class="eyebrow">Input Massal</div>
+        <h3 style="margin:3px 0 4px">Tempel Catatan Banyak</h3>
+        <div class="muted">Unduh template Excel, isi di Excel/Google Sheets, lalu copy seluruh tabel dan paste ke sini.</div>
+      </div>
+      <button class="btn btn-light" onclick="closeModal('bulkCatatanModal')">Tutup</button>
+    </div>
+
+    <div class="bulk-template-actions">
+      <button class="btn btn-primary-soft" onclick="downloadCatatanTemplate()">⇩ Download Template</button>
+      <span class="muted">Template berisi NIS + Nama Siswa + kolom catatan.</span>
+    </div>
+
+    <div class="helper-note">
+      Format: <b>NIS | Nama Siswa | Catatan | Saran Orang Tua | Referensi Tanggal Setoran | Tanggal Catatan</b>.
+      Nama hanya membantu guru. Sistem tetap memakai <b>NIS</b> sebagai identitas.
+      Referensi tanggal boleh kosong untuk memakai <b>setoran terakhir</b>. Tanggal catatan boleh kosong untuk memakai <b>hari ini</b>.
+    </div>
+
+    <textarea id="bulkCatatanText" class="input import-textarea" rows="12"
+      placeholder="NIS&#9;Nama Siswa&#9;Catatan&#9;Saran Orang Tua&#9;Referensi Tanggal Setoran&#9;Tanggal Catatan"></textarea>
+
+    <div id="bulkCatatanPreview" class="import-preview">
+      1) Download template Excel → 2) isi catatan → 3) copy seluruh sheet Catatan → 4) paste di sini.
+    </div>
+
+    <div class="import-foot">
+      <div class="muted">Baris tanpa catatan akan dilewati. Referensi setoran disimpan berdasarkan NIS + tanggal setoran.</div>
+      <div style="display:flex;gap:8px">
+        <button class="btn btn-light" onclick="closeModal('bulkCatatanModal')">Batal</button>
+        <button class="btn btn-primary" onclick="saveBulkCatatan()">Simpan Semua</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+      <section id="page-laporan" class="page hidden">
+        <div class="compact-head">
+          <div>
+            <div class="eyebrow">Pelaporan Tahfidz</div>
+            <h1>Laporan</h1>
+            <p>Pusat penyusunan laporan perkembangan hafalan siswa. Format ini masih bersifat sementara dan dapat disesuaikan setelah sekolah menetapkan format resmi.</p>
+          </div>
+          <div class="tool-actions">
+            <button class="btn btn-light" onclick="renderLaporan()">↻ Refresh</button>
+            <button class="btn btn-primary" onclick="exportLaporanExcel()">⇩ Export Excel</button>
+          </div>
+        </div>
+
+        <div class="card compact-card laporan-filter-card">
+          <div class="laporan-filters">
+            <div class="laporan-filter">
+              <label for="laporanPeriode">Periode</label>
+              <select id="laporanPeriode" class="input" onchange="renderLaporan()">
+                <option value="mingguan">Mingguan</option>
+                <option value="bulanan" selected>Bulanan</option>
+                <option value="semester">Semester</option>
+                <option value="custom">Custom</option>
+              </select>
+            </div>
+            <div class="laporan-filter">
+              <label for="laporanTahun">Tahun</label>
+              <select id="laporanTahun" class="input" onchange="renderLaporan()"></select>
+            </div>
+            <div class="laporan-filter">
+              <label for="laporanBulan">Bulan</label>
+              <select id="laporanBulan" class="input" onchange="renderLaporan()"></select>
+            </div>
+            <div class="laporan-filter">
+              <label for="laporanSemester">Semester</label>
+              <select id="laporanSemester" class="input" onchange="renderLaporan()">
+                <option value="1">Semester 1</option>
+                <option value="2">Semester 2</option>
+              </select>
+            </div>
+            <div class="laporan-filter">
+              <label for="laporanKelas">Kelas</label>
+              <select id="laporanKelas" class="input" onchange="renderLaporan()">
+                <option value="ALL">Semua kelas</option>
+              </select>
+            </div>
+            <div class="laporan-filter laporan-custom-date hidden" id="laporanCustomDateWrap">
+              <label for="laporanMulai">Mulai</label>
+              <input id="laporanMulai" class="input" type="date" onchange="renderLaporan()">
+            </div>
+            <div class="laporan-filter laporan-custom-date hidden" id="laporanCustomEndWrap">
+              <label for="laporanSampai">Sampai</label>
+              <input id="laporanSampai" class="input" type="date" onchange="renderLaporan()">
+            </div>
+          </div>
+
+          <div class="laporan-period-info" id="laporanPeriodInfo"></div>
+        </div>
+
+        <div class="stats laporan-stats">
+          <div class="stat">
+            <div class="stat-icon green">👥</div>
+            <div>
+              <div class="label">SISWA</div>
+              <div id="lapTotalSiswa">0</div>
+              <div class="hint">sesuai filter laporan</div>
+            </div>
+          </div>
+          <div class="stat">
+            <div class="stat-icon blue">✓</div>
+            <div>
+              <div class="label">SISWA SETOR</div>
+              <div id="lapSiswaSetor">0</div>
+              <div class="hint">minimal satu setoran</div>
+            </div>
+          </div>
+          <div class="stat">
+            <div class="stat-icon gold">↗</div>
+            <div>
+              <div class="label">TOTAL SETORAN</div>
+              <div id="lapTotalSetoran">0</div>
+              <div class="hint">dalam periode</div>
+            </div>
+          </div>
+          <div class="stat">
+            <div class="stat-icon rose">✎</div>
+            <div>
+              <div class="label">TOTAL CATATAN</div>
+              <div id="lapTotalCatatan">0</div>
+              <div class="hint">evaluasi guru</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid-main laporan-grid">
+          <div>
+            <div class="card">
+              <div class="cardhead">
+                <div>
+                  <div class="cardtitle">Ringkasan Perkembangan</div>
+                  <div class="cardsub">Gambaran sementara untuk membaca aktivitas hafalan dalam periode.</div>
+                </div>
+              </div>
+              <div class="laporan-summary-list">
+                <div class="lap-summary-row">
+                  <span>Siswa yang aktif menyetor</span><strong id="lapPctAktifSetor">0%</strong>
+                </div>
+                <div class="lap-summary-bar"><span id="lapBarAktifSetor"></span></div>
+
+                <div class="lap-summary-row">
+                  <span>Setoran berstatus Lancar</span><strong id="lapPctLancar">0%</strong>
+                </div>
+                <div class="lap-summary-bar"><span id="lapBarLancar"></span></div>
+
+                <div class="lap-summary-row">
+                  <span>Setoran berstatus Mengulang</span><strong id="lapPctMengulang">0%</strong>
+                </div>
+                <div class="lap-summary-bar"><span id="lapBarMengulang"></span></div>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="cardhead">
+                <div>
+                  <div class="cardtitle">Rekap Siswa</div>
+                  <div class="cardsub">Satu baris per siswa untuk kebutuhan laporan dan evaluasi.</div>
+                </div>
+              </div>
+              <div class="spreadsheet-wrap laporan-table-wrap mobile-table-shell">
+                <table class="spreadsheet-table laporan-table">
+                  <thead>
+                    <tr>
+                      <th>NIS</th>
+                      <th>NAMA</th>
+                      <th>KELAS</th>
+                      <th>SETORAN</th>
+                      <th>TERAKHIR</th>
+                      <th>SURAH</th>
+                      <th>AYAT</th>
+                      <th>STATUS</th>
+                      <th>CATATAN</th>
+                    </tr>
+                  </thead>
+                  <tbody id="laporanSiswaTable"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div class="card">
+              <div class="cardhead">
+                <div>
+                  <div class="cardtitle">Rekap per Kelas</div>
+                  <div class="cardsub">Ringkasan sementara berdasarkan kelas.</div>
+                </div>
+              </div>
+              <div id="laporanKelasList" class="lap-kelas-list"></div>
+            </div>
+
+            <div class="card">
+              <div class="cardhead">
+                <div>
+                  <div class="cardtitle">Catatan Pembinaan</div>
+                  <div class="cardsub">Siswa yang memiliki catatan guru dalam periode.</div>
+                </div>
+              </div>
+              <div id="laporanCatatanList" class="laporan-note-list"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card laporan-concept-card">
+          <div class="cardhead">
+            <div>
+              <div class="cardtitle">Konsep Laporan Sementara</div>
+              <div class="cardsub">Struktur ini dibuat sebagai fondasi sebelum format resmi sekolah diterima.</div>
+            </div>
+          </div>
+          <div class="laporan-concept-grid">
+            <div>
+              <h4>Identitas</h4>
+              <p>Nama siswa, NIS, kelas, periode laporan.</p>
+            </div>
+            <div>
+              <h4>Perkembangan Hafalan</h4>
+              <p>Jumlah setoran, surah yang dipelajari, ayat terakhir, dan status Lancar/Mengulang.</p>
+            </div>
+            <div>
+              <h4>Kehadiran Setoran</h4>
+              <p>Frekuensi siswa melakukan setoran pada periode yang dipilih.</p>
+            </div>
+            <div>
+              <h4>Evaluasi Guru</h4>
+              <p>Catatan pembinaan dan saran orang tua yang dibuat selama periode.</p>
+            </div>
+            <div>
+              <h4>Rekomendasi</h4>
+              <p>Ruang untuk kesimpulan dan rekomendasi pembinaan setelah format resmi ditetapkan.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <section id="page-rapor" class="page hidden">
+        <div class="compact-head">
+          <div>
+            <div class="eyebrow">Penilaian Tahfidz</div>
+            <h1>Rapor Tahfidz</h1>
+            <p>Format rapor sementara untuk mencetak perkembangan hafalan siswa. Struktur dapat disesuaikan setelah format resmi sekolah diterima.</p>
+          </div>
+          <div class="tool-actions">
+            <button class="btn btn-light" onclick="renderRapor()">↻ Refresh</button>
+          </div>
+        </div>
+
+        <div class="card compact-card rapor-filter-card">
+          <div class="rapor-filters">
+            <div class="rapor-filter">
+              <label for="raporPeriode">Periode</label>
+              <select id="raporPeriode" class="input" onchange="renderRapor()">
+                <option value="semester1" selected>Semester 1</option>
+                <option value="semester2">Semester 2</option>
+                <option value="custom">Custom</option>
+              </select>
+            </div>
+            <div class="rapor-filter">
+              <label for="raporTahunPelajaran">Tahun Pelajaran</label>
+              <input id="raporTahunPelajaran" class="input" value="2026/2027" placeholder="2026/2027" oninput="renderRapor()">
+            </div>
+            <div class="rapor-filter">
+              <label for="raporKelas">Kelas</label>
+              <select id="raporKelas" class="input" onchange="renderRapor()">
+                <option value="ALL">Semua kelas</option>
+              </select>
+            </div>
+            <div class="rapor-filter">
+              <label for="raporSiswa">Siswa</label>
+              <select id="raporSiswa" class="input" onchange="renderRaporPreview()">
+                <option value="">Pilih siswa</option>
+              </select>
+            </div>
+            <div class="rapor-filter">
+              <label for="raporKertas">Ukuran Kertas</label>
+              <select id="raporKertas" class="input" onchange="renderRaporPreview()">
+                <option value="A4" selected>A4 — 210 × 297 mm</option>
+                <option value="F4">F4 — 215,9 × 330,2 mm</option>
+              </select>
+            </div>
+            <div class="rapor-filter rapor-custom hidden" id="raporCustomMulaiWrap">
+              <label for="raporMulai">Mulai</label>
+              <input id="raporMulai" class="input" type="date" onchange="renderRapor()">
+            </div>
+            <div class="rapor-filter rapor-custom hidden" id="raporCustomSampaiWrap">
+              <label for="raporSampai">Sampai</label>
+              <input id="raporSampai" class="input" type="date" onchange="renderRapor()">
+            </div>
+          </div>
+
+          <div class="rapor-period-info" id="raporPeriodInfo"></div>
+
+          <div class="rapor-actions">
+            <div class="rapor-action-group rapor-review-group">
+              <div class="rapor-action-label">REVIEW</div>
+              <div class="rapor-action-buttons">
+                <button class="btn btn-review" onclick="openRaporBatchReview('kelas')">Review Satu Kelas</button>
+                <button class="btn btn-review" onclick="openRaporBatchReview('semua')">Review Semua</button>
+              </div>
+              <div class="rapor-action-hint">Periksa isi rapor sebelum dicetak.</div>
+            </div>
+
+            <div class="rapor-action-group rapor-print-group">
+              <div class="rapor-action-label">CETAK / DOWNLOAD</div>
+              <div class="rapor-action-buttons">
+                <button class="btn btn-primary" onclick="exportRaporIndividu()">PDF Siswa Dipilih</button>
+                <button class="btn btn-print-secondary" onclick="exportRaporKelas()">PDF Satu Kelas</button>
+                <button class="btn btn-print-secondary" onclick="exportRaporSemua()">PDF Semua Siswa</button>
+              </div>
+              <div class="rapor-action-hint">Membuat file PDF siap dicetak.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card rapor-preview-card">
+          <div class="cardhead">
+            <div>
+              <div class="cardtitle">Pratinjau Rapor</div>
+              <div class="cardsub">Tampilan ini mengikuti format sementara yang nantinya dapat disesuaikan dengan format sekolah.</div>
+            </div>
+          </div>
+
+          <div id="raporPreview" class="rapor-preview">
+            <div class="rapor-preview-empty">Pilih siswa untuk melihat pratinjau rapor.</div>
+          </div>
+        </div>
+
+        <div class="card rapor-konsep-card">
+          <div class="cardhead">
+            <div>
+              <div class="cardtitle">Struktur Sementara</div>
+              <div class="cardsub">Tidak ada nilai akademik numerik yang dipaksakan sebelum sekolah menetapkan format resminya.</div>
+            </div>
+          </div>
+          <div class="rapor-concept-grid">
+            <div><strong>1. Identitas</strong><span>Nama, NIS, kelas, tahun pelajaran, periode.</span></div>
+            <div><strong>2. Kehadiran Setoran</strong><span>Jumlah hari/transaksi setoran dalam periode.</span></div>
+            <div><strong>3. Capaian Hafalan</strong><span>Surah, ayat terakhir, dan status Lancar/Mengulang.</span></div>
+            <div><strong>4. Catatan Guru</strong><span>Evaluasi dan saran pembinaan kepada orang tua.</span></div>
+            <div><strong>5. Kesimpulan</strong><span>Deskripsi berbasis data perkembangan selama periode.</span></div>
+          </div>
+        </div>
+      </section>
+
+
+<div id="raporBatchReviewModal" class="modal hidden" data-close-on-overlay="false">
+  <div class="modalbox rapor-batch-review-modal">
+    <div class="progress-header">
+      <div>
+        <div class="eyebrow">Review Rapor</div>
+        <h3 id="raporBatchReviewTitle" style="margin:3px 0 3px;font-size:21px">Review Rapor</h3>
+        <div id="raporBatchReviewMeta" class="muted">0 dari 0 siswa</div>
+      </div>
+      <button class="btn btn-light" onclick="closeModal('raporBatchReviewModal')">Tutup</button>
+    </div>
+
+    <div class="rapor-batch-controls">
+      <select id="raporBatchStudentSelect" class="input" onchange="reviewRaporBatchStudent(Number(this.value))"></select>
+      <button class="btn btn-light" onclick="reviewRaporBatchPrevious()">← Sebelumnya</button>
+      <button class="btn btn-light" onclick="reviewRaporBatchNext()">Berikutnya →</button>
+    </div>
+
+    <div id="raporBatchReviewPaper" class="rapor-batch-review-paper"></div>
+
+    <div class="modal-actions rapor-batch-footer">
+      <button class="btn btn-light" onclick="closeModal('raporBatchReviewModal')">Tutup Review</button>
+      <button class="btn btn-primary" onclick="printCurrentRaporBatchStudent()">Cetak Siswa Ini</button>
+      <button class="btn btn-light" id="raporBatchPrintAllBtn" onclick="printCurrentRaporBatchAll()">Cetak Semua dalam Daftar</button>
+    </div>
+  </div>
+</div>
+
+
+
+<div id="accountModal" class="modal hidden" data-close-on-overlay="true">
+  <div class="modalbox account-modal">
+    <div class="cardhead">
+      <div>
+        <div class="eyebrow">Akun Saya</div>
+        <h3 style="margin:3px 0 4px">Pengaturan Akun</h3>
+        <div class="muted">Akun dikelola oleh Firebase Authentication.</div>
+      </div>
+      <button class="btn btn-light" type="button" onclick="closeModal('accountModal')">Tutup</button>
+    </div>
+
+    <div class="account-profile-card">
+      <div class="avatar account-avatar" id="accountAvatar">U</div>
+      <div>
+        <strong id="accountDisplayName">User</strong>
+        <span id="accountEmail">email</span>
+      </div>
+    </div>
+
+    <div class="account-section">
+      <div class="account-section-title">Ganti Password</div>
+      <div class="muted">Password baru akan langsung disimpan di Firebase Authentication.</div>
+
+      <div class="field">
+        <label for="accountCurrentPassword">Password Saat Ini</label>
+        <div class="password-field">
+        <input id="accountCurrentPassword" class="input" type="password" autocomplete="current-password">
+        <button type="button" class="password-toggle" aria-label="Lihat password saat ini" aria-pressed="false" onclick="togglePasswordVisibility('accountCurrentPassword', this)">
+          <span class="eye-icon eye-show" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12z"></path><circle cx="12" cy="12" r="2.5"></circle></svg>
+          </span>
+          <span class="eye-icon eye-hide" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="m3 3 18 18"></path><path d="M10.6 5.2A10.8 10.8 0 0 1 12 5c6.5 0 10 7 10 7a18 18 0 0 1-3.1 3.7"></path><path d="M6.2 6.2C3.7 8 2 12 2 12s3.5 7 10 7c1.7 0 3.2-.4 4.5-1.1"></path><path d="M9.9 9.9a3 3 0 0 0 4.2 4.2"></path></svg>
+          </span>
+        </button>
+      </div>
+      </div>
+
+      <div class="field">
+        <label for="accountNewPassword">Password Baru</label>
+        <div class="password-field">
+        <input id="accountNewPassword" class="input" type="password" autocomplete="new-password">
+        <button type="button" class="password-toggle" aria-label="Lihat password baru" aria-pressed="false" onclick="togglePasswordVisibility('accountNewPassword', this)">
+          <span class="eye-icon eye-show" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12z"></path><circle cx="12" cy="12" r="2.5"></circle></svg>
+          </span>
+          <span class="eye-icon eye-hide" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="m3 3 18 18"></path><path d="M10.6 5.2A10.8 10.8 0 0 1 12 5c6.5 0 10 7 10 7a18 18 0 0 1-3.1 3.7"></path><path d="M6.2 6.2C3.7 8 2 12 2 12s3.5 7 10 7c1.7 0 3.2-.4 4.5-1.1"></path><path d="M9.9 9.9a3 3 0 0 0 4.2 4.2"></path></svg>
+          </span>
+        </button>
+      </div>
+      </div>
+
+      <div class="field">
+        <label for="accountConfirmPassword">Konfirmasi Password Baru</label>
+        <div class="password-field">
+        <input id="accountConfirmPassword" class="input" type="password" autocomplete="new-password">
+        <button type="button" class="password-toggle" aria-label="Lihat konfirmasi password baru" aria-pressed="false" onclick="togglePasswordVisibility('accountConfirmPassword', this)">
+          <span class="eye-icon eye-show" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12z"></path><circle cx="12" cy="12" r="2.5"></circle></svg>
+          </span>
+          <span class="eye-icon eye-hide" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="m3 3 18 18"></path><path d="M10.6 5.2A10.8 10.8 0 0 1 12 5c6.5 0 10 7 10 7a18 18 0 0 1-3.1 3.7"></path><path d="M6.2 6.2C3.7 8 2 12 2 12s3.5 7 10 7c1.7 0 3.2-.4 4.5-1.1"></path><path d="M9.9 9.9a3 3 0 0 0 4.2 4.2"></path></svg>
+          </span>
+        </button>
+      </div>
+      </div>
+
+      <div id="accountPasswordError" class="alert" style="display:none"></div>
+      <div id="accountPasswordHint" class="account-password-hint">
+        Gunakan password yang sulit ditebak dan jangan membagikannya kepada orang lain.
+      </div>
+    </div>
+
+    <div class="modal-actions">
+      <button class="btn btn-light" type="button" onclick="closeModal('accountModal')">Batal</button>
+      <button class="btn btn-primary" id="saveAccountPasswordBtn" type="button" onclick="changeMyPassword()">Simpan Password</button>
+    </div>
+  </div>
+</div>
+
+<div id="teacherMotivationModal" class="modal hidden" data-close-on-overlay="false">
+  <div class="modalbox teacher-motivation-modal">
+    <div class="teacher-motivation-top">
+      <div class="teacher-motivation-icon">✦</div>
+      <div class="eyebrow">PENGINGAT HARI INI</div>
+    </div>
+
+    <div id="teacherMotivationType" class="teacher-motivation-type">Ayat Al-Qur'an</div>
+    <div id="teacherMotivationText" class="teacher-motivation-text"></div>
+    <div id="teacherMotivationSource" class="teacher-motivation-source"></div>
+
+    <div class="teacher-motivation-message">
+      <strong>Peran Anda berarti.</strong>
+      Tidak semua kebaikan seorang guru langsung terlihat hasilnya.
+      Sebagian tumbuh perlahan dalam diri siswa, menjadi kebiasaan, ketekunan,
+      dan akhirnya menjadi bagian dari hidup mereka.
+      <br><br>
+      Apa yang Anda lakukan di sini bukan sekadar mengelola setoran.
+      Anda sedang membantu menjaga perjalanan hafalan seseorang.
+    </div>
+
+    <div class="teacher-motivation-footer">
+      <div class="teacher-motivation-brand">
+        <span><span data-brand-footer>Bina Tahfidz · SMPIT Al Firdaus Purwodadi</span></span>
+        <small>Terima kasih telah menjaga proses mereka.</small>
+      </div>
+      <button type="button" class="btn btn-primary" onclick="closeTeacherMotivation()">Mulai Pembinaan →</button>
+    </div>
+  </div>
+</div>
+
+<div id="studentProgressModal" class="modal hidden" data-close-on-overlay="true">
+  <div class="modalbox progress-box">
+    <div class="progress-header">
+      <div>
+        <div class="eyebrow">Profil Perkembangan</div>
+        <h3 id="progressStudentName" style="margin:3px 0 3px;font-size:21px">Nama Siswa</h3>
+        <div id="progressStudentMeta" class="muted">NIS · Kelas</div><div id="progressUnifiedHint" class="progress-unified-hint">Setoran, hafalan, dan catatan siswa berasal dari profil yang sama.</div>
+      </div>
+      <button class="btn btn-light" onclick="closeModal('studentProgressModal')">Tutup</button>
+    </div>
+
+    <div class="progress-summary">
+      <div class="progress-kpi">
+        <span>Total Setoran</span>
+        <strong id="progressTotalSetoran">0</strong>
+      </div>
+      <div class="progress-kpi">
+        <span>Surah Dipelajari</span>
+        <strong id="progressSurahCount">0</strong>
+      </div>
+      <div class="progress-kpi">
+        <span>Status Lancar</span>
+        <strong id="progressLancarCount">0</strong>
+      </div>
+      <div class="progress-kpi">
+        <span>Catatan Guru</span>
+        <strong id="progressCatatanCount">0</strong>
+      </div>
+      <div class="progress-kpi">
+        <span>Juziyah Lulus</span>
+        <strong id="progressJuziyahCount">0</strong>
+      </div>
+    </div>
+
+    <div class="progress-tabs">
+      <button class="progress-tab active" data-tab="ringkasan" onclick="switchProgressTab('ringkasan')">Ringkasan</button>
+      <button class="progress-tab" data-tab="setoran" onclick="switchProgressTab('setoran')">Riwayat Setoran</button>
+      <button class="progress-tab" data-tab="hafalan" onclick="switchProgressTab('hafalan')">Hafalan</button>
+      <button class="progress-tab" data-tab="juziyah" onclick="switchProgressTab('juziyah')">Juziyah</button>
+      <button class="progress-tab" data-tab="catatan" onclick="switchProgressTab('catatan')">Catatan</button>
+    </div>
+
+    <section id="progress-tab-ringkasan" class="progress-panel">
+      <div class="progress-grid-2">
+        <div class="progress-card">
+          <div class="progress-card-head">
+            <div>
+              <div class="progress-card-title">Hafalan Terakhir</div>
+              <div class="progress-card-sub">Surah dan ayat terakhir yang tercatat.</div>
+            </div>
+          </div>
+          <div id="progressLatestMemory" class="progress-highlight empty">Belum ada setoran.</div>
+        </div>
+
+        <div class="progress-card">
+          <div class="progress-card-head">
+            <div>
+              <div class="progress-card-title">Aktivitas Setoran</div>
+              <div class="progress-card-sub">Perbandingan status setoran.</div>
+            </div>
+          </div>
+          <div class="status-bars">
+            <div class="status-bar-row">
+              <div class="status-bar-label"><span>Lancar</span><strong id="progressLancarPercent">0%</strong></div>
+              <div class="status-bar"><span id="progressLancarBar"></span></div>
+            </div>
+            <div class="status-bar-row">
+              <div class="status-bar-label"><span>Mengulang</span><strong id="progressUlangPercent">0%</strong></div>
+              <div class="status-bar warning"><span id="progressUlangBar"></span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="progress-card">
+        <div class="progress-card-head">
+          <div>
+            <div class="progress-card-title">Perjalanan Hafalan</div>
+            <div class="progress-card-sub">Ringkasan surah yang sudah memiliki riwayat setoran.</div>
+          </div>
+        </div>
+        <div id="progressJourney" class="journey-grid"></div>
+      </div>
+    </section>
+
+    <section id="progress-tab-setoran" class="progress-panel hidden">
+      <div class="progress-card">
+        <div class="progress-card-head">
+          <div>
+            <div class="progress-card-title">Riwayat Setoran</div>
+            <div class="progress-card-sub">Seluruh riwayat setoran siswa dari yang terbaru.</div>
+          </div>
+          <button class="btn btn-primary" id="progressAddSetoranBtn">＋ Setoran</button>
+        </div>
+        <div class="tablewrap">
+          <table class="progress-table">
+            <thead><tr><th>Tanggal</th><th>Surah</th><th>Juz</th><th>Ayat</th><th>Status</th><th>Aksi</th></tr></thead>
+            <tbody id="progressSetoranTable"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section id="progress-tab-hafalan" class="progress-panel hidden">
+      <div class="progress-card">
+        <div class="progress-card-head">
+          <div>
+            <div class="progress-card-title">Hafalan per Surah</div>
+            <div class="progress-card-sub">Ayat terakhir tercatat dan persentase perjalanan pada setiap surah.</div>
+          </div>
+        </div>
+        <div id="progressHafalanList"></div>
+      </div>
+    </section>
+
+    
+    <section id="progress-tab-juziyah" class="progress-panel hidden">
+      <div class="progress-card">
+        <div class="progress-card-head">
+          <div>
+            <div class="progress-card-title">Juziyah</div>
+            <div class="progress-card-sub">Riwayat ujian Juziyah dan hasil kelulusan siswa.</div>
+          </div>
+          <button class="btn btn-primary" id="progressAddJuziyahBtn">＋ Juziyah</button>
+        </div>
+        <div id="progressJuziyahList"></div>
+      </div>
+    </section>
+
+<section id="progress-tab-catatan" class="progress-panel hidden">
+      <div class="progress-card">
+        <div class="progress-card-head">
+          <div>
+            <div class="progress-card-title">Catatan Guru</div>
+            <div class="progress-card-sub">Evaluasi dan saran yang diberikan kepada orang tua.</div>
+          </div>
+          <button class="btn btn-primary" id="progressAddCatatanBtn">＋ Catatan</button>
+        </div>
+        <div id="progressCatatanList"></div>
+      </div>
+    </section>
+  </div>
+</div>
+
+<div id="importModal" class="modal hidden" data-close-on-overlay="true">
+  <div class="modalbox import-box">
+    <div class="modal-title-row">
+      <div>
+        <div class="eyebrow">Input Massal</div>
+        <h3 id="importTitle" style="margin:3px 0 4px">Import Data</h3>
+        <div id="importHint" class="muted"></div>
+      </div>
+      <button class="btn btn-light" onclick="closeModal('importModal')">Tutup</button>
+    </div>
+
+    <div class="import-options">
+      <label class="btn btn-light file-btn">Pilih File CSV
+        <input id="importFile" type="file" accept=".csv,.txt" onchange="loadImportFile(this.files[0])">
+      </label>
+      <button class="btn btn-light" onclick="pasteClipboardIntoImport()">📋 Tempel dari Clipboard</button>
+      <button class="btn btn-light" onclick="downloadImportTemplate()">Template</button>
+    </div>
+
+    <div class="field">
+      <label>CSV / TSV</label>
+      <textarea id="importText" class="input import-textarea" rows="11" placeholder="Tempel data dari Excel/Google Sheets di sini..."></textarea>
+    </div>
+    <div id="importPreview" class="import-preview">Belum ada data untuk dipreview.</div>
+    <div class="import-foot">
+      <div class="muted">Header tidak wajib. Data dengan NIS yang sama akan diperbarui untuk siswa.</div>
+      <div style="display:flex;gap:8px">
+        <button class="btn btn-light" onclick="closeModal('importModal')">Batal</button>
+        <button class="btn btn-primary" id="importSaveBtn" onclick="runImport()">Import Data</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="noticeModal" class="modal hidden" data-close-on-overlay="true">
+  <div class="notice-box">
+    <div id="noticeIcon" class="notice-icon">✓</div>
+    <h3 id="noticeTitle">Berhasil</h3>
+    <div id="noticeMessage" class="notice-message"></div>
+    <button class="btn btn-primary" onclick="closeModal('noticeModal')" style="width:100%;margin-top:14px">Mengerti</button>
+  </div>
+</div>
+
+<div id="confirmModal" class="modal hidden" data-close-on-overlay="true">
+  <div class="notice-box">
+    <div class="notice-icon notice-warning">!</div>
+    <h3 id="confirmTitle">Konfirmasi</h3>
+    <div id="confirmMessage" class="notice-message"></div>
+    <div style="display:flex;gap:8px;margin-top:16px">
+      <button class="btn btn-light" style="flex:1" onclick="resolveConfirm(false)">Batal</button>
+      <button class="btn btn-red" style="flex:1" onclick="resolveConfirm(true)">Ya, lanjutkan</button>
+    </div>
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/exceljs@4.4.0/dist/exceljs.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.4/jspdf.plugin.autotable.min.js"></script>
+<script type="module" src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,11 @@
+{
+  "name": "tahfidz-app-v1",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "firebase-admin": "^13.5.0"
+  },
+  "scripts": {
+    "seed-surah": "node seed-surah.mjs"
+  }
+}

@@ -1,0 +1,3743 @@
+
+:root{
+  --bg:#f3f7f4;
+  --surface:#ffffff;
+  --surface-2:#f8fbf9;
+  --text:#173126;
+  --muted:#71817a;
+  --line:#e6ece8;
+  --green:#087443;
+  --green-2:#0c8a50;
+  --green-dark:#075b36;
+  --green-soft:#eaf6ef;
+  --gold:#d3a54f;
+  --gold-soft:#fff7e9;
+  --rose-soft:#fff0ee;
+  --rose:#cf6658;
+  --sidebar:#063a25;
+  --sidebar-2:#0a4b30;
+  --shadow:0 8px 24px rgba(23,49,38,.06);
+  --shadow-lg:0 18px 45px rgba(23,49,38,.09);
+}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg);color:var(--text)}
+body{overflow-x:hidden}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+.hidden{display:none!important}
+
+.topbar{
+  height:68px;background:rgba(255,255,255,.95);backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;
+  padding:0 26px;position:sticky;top:0;z-index:40
+}
+.top-left{display:flex;align-items:center;gap:16px;min-width:0}
+.brand{display:flex;align-items:center;gap:10px;white-space:nowrap}
+.brand-mark{
+  width:34px;height:34px;border-radius:10px;background:linear-gradient(145deg,var(--green),var(--green-2));
+  color:#fff;display:grid;place-items:center;font-weight:900;box-shadow:0 7px 18px rgba(8,116,67,.18)
+}
+.brand-text strong{display:block;font-size:14px;color:#174331}
+.brand-text small{display:block;font-size:10px;color:var(--muted);margin-top:1px}
+.breadcrumb{font-size:12px;color:#9aa6a0;display:flex;align-items:center;gap:7px}
+.breadcrumb b{color:#314b3e}
+.top-actions{display:flex;align-items:center;gap:8px}
+.top-icon{
+  width:36px;height:36px;border-radius:10px;border:1px solid var(--line);background:#fff;color:#557067
+}
+.top-user{
+  display:flex;align-items:center;gap:9px;margin-left:4px;padding-left:10px;border-left:1px solid var(--line)
+}
+.avatar{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:#e8f5ed;color:#1b6c49;font-weight:800;font-size:12px}
+.user-copy strong{display:block;font-size:12px}
+.user-copy span{display:block;font-size:10px;color:var(--muted)}
+
+.layout{display:grid;grid-template-columns:225px minmax(0,1fr);min-height:calc(100vh - 68px)}
+.sidebar{
+  background:linear-gradient(180deg,var(--sidebar),var(--sidebar-2));
+  color:#d8eadf;padding:16px 12px;position:sticky;top:68px;height:calc(100vh - 68px);overflow:auto
+}
+.sidebar-brand{padding:8px 10px 20px;display:flex;align-items:center;gap:10px}
+.sidebar-logo{
+  width:34px;height:34px;border-radius:10px;background:rgba(255,255,255,.12);
+  display:grid;place-items:center;font-size:16px
+}
+.sidebar-brand strong{font-size:13px;color:#fff}
+.sidebar-brand span{font-size:10px;color:#8db09f;display:block}
+.nav-group-title{
+  font-size:9px;text-transform:uppercase;letter-spacing:.13em;color:#78a48f;font-weight:800;padding:10px 11px 7px
+}
+.navbtn{
+  width:100%;border:0;background:transparent;color:#bad2c5;border-radius:9px;
+  padding:10px 11px;display:flex;align-items:center;gap:10px;margin-bottom:3px;font-weight:700;font-size:12px;
+  text-align:left
+}
+.navbtn:hover{background:rgba(255,255,255,.06);color:#fff}
+.navbtn.active{background:rgba(255,255,255,.11);color:#fff;box-shadow:inset 3px 0 0 var(--gold)}
+.navicon{width:18px;display:grid;place-items:center;font-size:13px}
+.side-footer{margin-top:26px;padding:12px;border-top:1px solid rgba(255,255,255,.08);font-size:10px;color:#78a48f;line-height:1.55}
+
+.content{padding:10px 26px 34px;max-width:1540px;width:100%;margin:0 auto}
+.page-head{
+  display:flex;align-items:flex-end;justify-content:space-between;gap:14px;margin-bottom:16px
+}
+.page-head h1{font-size:28px;letter-spacing:-.035em;margin:2px 0 3px;color:#173d2d}
+.page-head p{margin:0;color:var(--muted);font-size:13px}
+.eyebrow{font-size:10px;color:#6e8178;text-transform:uppercase;letter-spacing:.12em;font-weight:900}
+
+.hero{
+  background:
+    radial-gradient(circle at 86% 22%,rgba(255,255,255,.10),transparent 24%),
+    linear-gradient(135deg,#075b36,#0a7045);
+  border-radius:16px;padding:20px 22px;color:#fff;box-shadow:0 13px 32px rgba(7,91,54,.16);
+  position:relative;overflow:hidden;margin-bottom:18px
+}
+.hero:after{
+  content:"";position:absolute;right:-50px;bottom:-50px;width:180px;height:180px;border-radius:50%;
+  border:24px solid rgba(255,255,255,.045)
+}
+.hero-top{display:flex;justify-content:space-between;gap:18px;align-items:flex-start}
+.hero h2{margin:4px 0 6px;font-size:20px;letter-spacing:-.025em}
+.hero p{margin:0;opacity:.8;font-size:11px;line-height:1.5}
+.hero-note{font-size:10px;color:#d6eee0;letter-spacing:.02em}
+.quick-stats{
+  background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.12);
+  border-radius:12px;padding:10px;display:grid;grid-template-columns:repeat(4,minmax(65px,1fr));gap:6px;min-width:350px
+}
+.quick-stat{padding:8px 9px;border-radius:9px;background:rgba(255,255,255,.07)}
+.quick-stat span{font-size:9px;color:#bce0cc;display:block}
+.quick-stat strong{font-size:15px;display:block;margin-top:2px}
+
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:14px}
+.stat{
+  background:#fff;border:1px solid var(--line);border-radius:13px;padding:15px 16px;box-shadow:var(--shadow);
+  display:flex;gap:12px;align-items:flex-start
+}
+.stat-icon{
+  flex:0 0 38px;width:38px;height:38px;border-radius:10px;display:grid;place-items:center;font-size:16px
+}
+.stat-icon.green{background:#ebf7f0;color:#1d7a52}
+.stat-icon.gold{background:#fff6e6;color:#aa7b2e}
+.stat-icon.blue{background:#eef5ff;color:#4175b9}
+.stat-icon.rose{background:#fff0ee;color:#c25f51}
+.stat .label{font-size:11px;color:#75847d;font-weight:800}
+.stat .n{font-size:28px;font-weight:850;line-height:1.05;margin-top:3px;color:#183a2c}
+.stat .hint{font-size:10px;color:#9aa69f;margin-top:5px}
+
+.grid-main{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(280px,.9fr);gap:15px}
+.card{
+  background:#fff;border:1px solid var(--line);border-radius:14px;padding:17px;box-shadow:var(--shadow);margin-bottom:15px
+}
+.cardhead{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:13px}
+.cardtitle{font-size:15px;font-weight:850;color:#234537}
+.cardsub{font-size:11px;color:#91a099;margin-top:2px}
+.link-btn{border:0;background:transparent;color:#4c806b;font-size:10px;font-weight:800}
+
+.activity-row{
+  display:grid;grid-template-columns:34px minmax(0,1fr) auto;gap:9px;align-items:center;
+  padding:11px 0;border-bottom:1px solid #edf1ee
+}
+.activity-row:last-child{border-bottom:0}
+.activity-icon{width:34px;height:34px;border-radius:9px;display:grid;place-items:center;background:#eff7f2;color:#287252;font-size:14px}
+.activity-name{font-size:11px;font-weight:800;color:#264737}
+.activity-desc{font-size:10px;color:#86948d;margin-top:3px}
+.activity-time{font-size:9px;color:#a0aaa5}
+
+.chart-wrap{height:210px;display:grid;place-items:center}
+.donut{
+  width:145px;height:145px;border-radius:50%;
+  background:conic-gradient(var(--green) 0 76%,#e8efe9 76% 100%);
+  position:relative;display:grid;place-items:center
+}
+.donut:after{content:"";position:absolute;inset:16px;background:#fff;border-radius:50%}
+.donut-center{position:relative;z-index:2;text-align:center}
+.donut-center strong{font-size:27px;color:#1b3e2f;display:block}
+.donut-center span{font-size:9px;color:#8b9891}
+
+.legend{display:grid;gap:7px;margin-top:6px}
+.legend-row{display:flex;align-items:center;justify-content:space-between;font-size:10px;color:#687871}
+.legend-left{display:flex;align-items:center;gap:7px}
+.dot{width:8px;height:8px;border-radius:50%}
+
+.tablewrap{overflow:auto;border:1px solid var(--line);border-radius:11px}
+table{width:100%;border-collapse:separate;border-spacing:0;min-width:740px}
+th,td{padding:11px 12px;border-bottom:1px solid #edf1ee;font-size:12px;text-align:left;white-space:nowrap}
+th{font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:#7f8e86;background:#fafcfa}
+tbody tr:hover td{background:#fcfefd}
+tbody tr:last-child td{border-bottom:0}
+
+.btn{border:0;border-radius:9px;padding:10px 13px;font-weight:800;font-size:12px}
+.btn-primary{background:linear-gradient(135deg,#087443,#1a8956);color:#fff;box-shadow:0 7px 16px rgba(8,116,67,.16)}
+.btn-light{background:#fff;color:#486158;border:1px solid var(--line)}
+.btn-light:hover{background:#f7faf8}
+.btn-red{background:#fff0ef;color:#9c4035}
+.btn-green{background:#eaf6ef;color:#24674e}
+.actions{display:flex;gap:6px;flex-wrap:wrap}
+.actions .btn{padding:7px 10px;font-size:11px}
+
+.field{margin-bottom:12px}
+.field label{display:block;font-size:11px;font-weight:800;color:#567066;margin-bottom:5px}
+.input{width:100%;border:1px solid #d6e0d9;border-radius:9px;padding:10px 11px;background:#fff;color:var(--text);outline:none}
+.input:focus{border-color:#9fc8b2;box-shadow:0 0 0 3px rgba(8,116,67,.08)}
+.modal{position:fixed;inset:0;background:rgba(16,37,29,.45);backdrop-filter:blur(4px);display:grid;place-items:center;padding:18px;z-index:80}
+.modalbox{width:min(680px,100%);max-height:92vh;overflow:auto;background:#fff;border-radius:16px;padding:20px;box-shadow:var(--shadow-lg)}
+.modal.hidden{display:none}
+.login-shell{
+  min-height:100vh;display:grid;place-items:center;padding:20px;
+  background:
+    radial-gradient(circle at 16% 14%,rgba(8,116,67,.10),transparent 25%),
+    radial-gradient(circle at 84% 12%,rgba(211,165,79,.09),transparent 22%),
+    #f3f7f4
+}
+.login-card{width:min(420px,100%);background:#fff;border:1px solid var(--line);border-radius:18px;padding:28px;box-shadow:var(--shadow-lg);position:relative}
+.login-card:before{content:"";position:absolute;left:0;top:0;right:0;height:4px;background:linear-gradient(90deg,#087443,#d3a54f)}
+.login-brand{display:flex;align-items:center;gap:11px;margin-bottom:22px}
+.login-card h2{margin:0 0 5px;font-size:22px}
+.login-card .subtitle{font-size:12px;color:var(--muted);line-height:1.55;margin-bottom:18px}
+.alert{padding:10px 12px;border-radius:9px;background:#fff0ef;color:#943e37;border:1px solid #f2d4d0;font-size:11px;margin-bottom:11px}
+.muted{color:var(--muted);font-size:11px}
+.empty{padding:28px;text-align:center;color:#9aa59f}
+@media(max-width:1180px){
+  .grid-main{grid-template-columns:1fr}
+  .quick-stats{min-width:320px}
+}
+@media(max-width:980px){
+  .layout{grid-template-columns:80px minmax(0,1fr)}
+  .sidebar-brand,.nav-group-title,.navbtn .navtext,.side-footer{display:none}
+  .navbtn{justify-content:center}
+  .navicon{width:auto}
+  .stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .breadcrumb{display:none}
+}
+@media(max-width:720px){
+  .topbar{height:62px;padding:0 12px}
+  .layout{display:block}
+  .sidebar{
+    position:fixed;left:0;right:0;bottom:0;top:auto;height:auto;z-index:70;
+    display:flex;padding:7px 5px;border-top:1px solid rgba(255,255,255,.10)
+  }
+  .navbtn{flex:1;min-width:70px;display:flex;flex-direction:column;gap:3px;padding:7px 4px;font-size:9px;margin:0}
+  .navbtn .navtext{display:block!important}
+  .content{padding:15px 12px 88px}
+  .hero{padding:17px;border-radius:14px}
+  .hero-top{display:block}
+  .quick-stats{margin-top:14px;min-width:0;grid-template-columns:repeat(2,1fr)}
+  .stats{gap:9px}
+  .stat{padding:12px}
+  .stat .n{font-size:23px}
+  .stat .hint{display:none}
+  .top-user{display:none}
+  .top-icon{display:none}
+  .page-head{align-items:flex-start;flex-direction:column}
+  .page-head h1{font-size:22px}
+  table{min-width:680px}
+}
+
+/* V6 compact refinements */
+.compact-head{display:flex;align-items:center;justify-content:space-between;gap:14px;margin:4px 0 10px}
+.compact-head h1{font-size:23px;letter-spacing:-.03em;margin:2px 0 3px;color:#173d2d}
+.compact-head p{margin:0;color:var(--muted);font-size:11px}
+.compact-card{padding:14px 16px}
+.logout-btn{
+  border:1px solid #dce5df;background:#fff;color:#486158;border-radius:9px;
+  height:34px;padding:0 11px;display:inline-flex;align-items:center;gap:7px;
+  font-size:11px;font-weight:800
+}
+.logout-btn:hover{background:#f6faf7;border-color:#cbd9d2}
+.logout-icon{font-size:16px;line-height:1;transform:translateY(-1px)}
+.top-actions{gap:7px}
+.top-user{padding-left:8px;margin-left:0}
+.page-head{margin-bottom:12px}
+.card{margin-bottom:12px}
+.tablewrap{border-radius:10px}
+th,td{padding:9px 10px}
+.toolbar{margin-bottom:10px}
+.content{padding-top:20px}
+@media(max-width:720px){
+  .compact-head{align-items:flex-start;flex-direction:column;gap:8px}
+  .compact-head .btn{align-self:flex-start}
+  .topbar{padding:0 10px}
+  .logout-btn{padding:0 9px}
+}
+
+.top-icon{display:none!important}
+
+
+/* V7 typography + spacing refinement */
+.page-head + .card{margin-top:0}
+.page-head + .stats{margin-top:0}
+.page-head + .hero{margin-top:0}
+.content > .page > .page-head + .card{margin-top:0}
+.content > .page > .page-head{padding-top:0}
+@media(max-width:720px){
+  .content{padding:10px 12px 86px}
+  .page-head{margin-bottom:8px}
+  .page-head h1{font-size:24px}
+  .page-head p{font-size:12px}
+}
+
+
+/* V8 — desktop rhythm, typography, and school branding */
+.content{
+  margin-top:0;
+  align-self:start;
+}
+.compact-head{
+  margin-top:0;
+  margin-bottom:8px;
+}
+.compact-head h1{
+  font-size:28px;
+  line-height:1.15;
+  margin:0 0 4px;
+}
+.compact-head p{
+  font-size:13px;
+}
+.compact-card{
+  padding:14px 16px;
+}
+.tablewrap th{
+  font-size:10px;
+}
+.tablewrap td{
+  font-size:13px;
+}
+.tablewrap th,.tablewrap td{
+  padding:11px 12px;
+}
+.input{
+  font-size:14px;
+  min-height:42px;
+}
+.btn{
+  font-size:12px;
+  min-height:40px;
+}
+.logout-btn{
+  min-height:36px;
+  font-size:12px;
+  padding:0 12px;
+}
+.school-logo{
+  width:38px;
+  height:38px;
+  object-fit:contain;
+  display:block;
+}
+.sidebar-school-logo{
+  width:40px;
+  height:40px;
+  object-fit:contain;
+  background:#fff;
+  border-radius:10px;
+  padding:3px;
+}
+.login-school-logo{
+  width:52px;
+  height:52px;
+  object-fit:contain;
+  background:#fff;
+  border-radius:12px;
+  padding:3px;
+  border:1px solid var(--line);
+}
+.school-name{
+  font-size:11px;
+  color:var(--muted);
+  line-height:1.35;
+}
+@media(max-width:720px){
+  .content{padding:10px 12px 88px;margin:0}
+  .compact-head h1{font-size:24px}
+  .compact-head p{font-size:12px}
+  .tablewrap td{font-size:12px}
+  .input{font-size:13px}
+}
+
+/* V9 DATA TOOLS */
+.data-toolbar{display:grid;grid-template-columns:minmax(240px,1fr) auto auto;gap:8px;align-items:center}
+.data-search{position:relative;min-width:0}
+.search-icon{position:absolute;left:11px;top:50%;transform:translateY(-50%);color:#8ca098;font-size:16px;z-index:2}
+.data-search .input{padding-left:34px}
+.filter-input{width:170px}
+.tool-actions{display:flex;gap:7px;flex-wrap:wrap;justify-content:flex-end}
+.helper-note{font-size:11px;color:#82918a;background:#f7faf8;border:1px dashed #dfe8e2;border-radius:9px;padding:8px 10px;margin:9px 0 11px}
+.check-col{width:38px;text-align:center}
+.check-col input,.row-check{width:15px;height:15px;accent-color:#087443}
+.bulk-delete-btn{display:none}
+.bulk-delete-btn.visible{display:inline-flex}
+.edit-mode-row td{background:#fffdf7}
+.inline-cell{padding:5px!important}
+.inline-input,.inline-select{width:100%;border:1px solid #d8e4db;border-radius:7px;padding:7px 8px;background:#fff;font:inherit}
+.import-box{width:min(900px,100%)}
+.modal-title-row{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;margin-bottom:14px}
+.import-options{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.file-btn{position:relative;overflow:hidden}
+.file-btn input{position:absolute;inset:0;opacity:0;cursor:pointer}
+.import-textarea{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:12px;min-height:190px}
+.import-preview{border:1px solid #e4ece7;border-radius:10px;background:#fbfdfb;min-height:55px;max-height:210px;overflow:auto;padding:10px;margin-top:10px}
+.preview-table{width:100%;min-width:0}
+.preview-table th,.preview-table td{font-size:10px;padding:7px 8px}
+.import-foot{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-top:13px}
+.notice-box{width:min(430px,100%);background:#fff;border-radius:18px;padding:24px;box-shadow:0 20px 60px rgba(20,47,36,.18);text-align:center;border:1px solid #e2ebe5}
+.notice-icon{width:50px;height:50px;border-radius:50%;margin:0 auto 10px;display:grid;place-items:center;background:#e9f7ef;color:#207351;font-weight:900;font-size:21px}
+.notice-warning{background:#fff6e7;color:#a46e29}
+.notice-box h3{margin:0;font-size:18px;color:#1a3b2d}
+.notice-message{color:#6b7e75;font-size:13px;line-height:1.55;margin-top:6px}
+@media(max-width:1050px){
+  .data-toolbar{grid-template-columns:1fr}
+  .filter-input{width:100%}
+  .tool-actions{justify-content:flex-start}
+}
+@media(max-width:720px){
+  .tool-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
+  .tool-actions .btn{width:100%}
+  .import-foot{flex-direction:column;align-items:stretch}
+}
+
+
+/* V10 — student development profile */
+.btn-primary-soft{
+  border:1px solid #cfe7da;
+  background:#edf7f2;
+  color:#286a50;
+}
+.btn-primary-soft:hover{background:#e2f2e9}
+.progress-box{width:min(980px,100%);padding:22px}
+.progress-header{display:flex;justify-content:space-between;align-items:flex-start;gap:15px;margin-bottom:15px}
+.progress-summary{
+  display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-bottom:15px
+}
+.progress-kpi{
+  border:1px solid #e3ebe6;background:#f9fbf9;border-radius:11px;padding:12px
+}
+.progress-kpi span{display:block;font-size:10px;color:#83928a;font-weight:800}
+.progress-kpi strong{display:block;font-size:23px;color:#214636;margin-top:4px}
+.progress-tabs{
+  display:flex;gap:5px;border-bottom:1px solid #e2e9e4;margin-bottom:14px;overflow:auto
+}
+.progress-tab{
+  border:0;background:transparent;padding:10px 13px;color:#7a8b83;font-size:11px;font-weight:800;
+  border-bottom:2px solid transparent;white-space:nowrap
+}
+.progress-tab.active{color:#21694e;border-bottom-color:#2f805f}
+.progress-panel.hidden{display:none}
+.progress-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.progress-card{
+  border:1px solid #e4ebe7;background:#fff;border-radius:12px;padding:14px;margin-bottom:12px
+}
+.progress-card-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;margin-bottom:12px}
+.progress-card-title{font-size:13px;font-weight:850;color:#254838}
+.progress-card-sub{font-size:10px;color:#8b9992;margin-top:3px;line-height:1.45}
+.progress-highlight{
+  min-height:100px;display:flex;flex-direction:column;justify-content:center;
+  border-radius:10px;background:linear-gradient(135deg,#eef8f2,#fbfcfa);padding:14px
+}
+.progress-highlight strong{font-size:18px;color:#20533d}
+.progress-highlight span{font-size:11px;color:#74857c;margin-top:4px}
+.status-bars{padding:6px 0}
+.status-bar-row{margin:0 0 15px}
+.status-bar-row:last-child{margin-bottom:0}
+.status-bar-label{display:flex;justify-content:space-between;font-size:10px;color:#6f8178;margin-bottom:6px}
+.status-bar{height:9px;border-radius:99px;background:#edf2ef;overflow:hidden}
+.status-bar span{display:block;height:100%;width:0%;background:#2f805f;border-radius:99px;transition:width .25s}
+.status-bar.warning span{background:#d1a34e}
+.journey-grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:9px
+}
+.journey-item{
+  border:1px solid #e4ece7;border-radius:10px;padding:11px;background:#fbfdfb
+}
+.journey-item-top{display:flex;justify-content:space-between;gap:8px;align-items:center}
+.journey-name{font-size:11px;font-weight:850;color:#254737}
+.journey-meta{font-size:9px;color:#899790;margin-top:4px}
+.journey-progress{height:7px;border-radius:99px;background:#edf2ef;overflow:hidden;margin-top:9px}
+.journey-progress span{display:block;height:100%;background:linear-gradient(90deg,#2f805f,#63a986);border-radius:99px}
+.progress-table{min-width:680px}
+.progress-table th,.progress-table td{font-size:11px}
+.progress-note{
+  padding:13px;border-radius:10px;background:#f8fbf9;border-left:3px solid #d3a54f;margin-bottom:9px
+}
+.progress-note:last-child{margin-bottom:0}
+.progress-note-date{font-size:9px;color:#87958e;font-weight:700}
+.progress-note-title{font-size:11px;color:#2a4739;font-weight:850;margin-top:3px}
+.progress-note-text{font-size:11px;line-height:1.5;color:#63746c;margin-top:6px;white-space:pre-wrap}
+.progress-note-saran{font-size:10px;line-height:1.5;color:#2d6b51;margin-top:8px;background:#eef8f2;border-radius:8px;padding:8px;white-space:pre-wrap}
+@media(max-width:800px){
+  .progress-summary{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .progress-grid-2{grid-template-columns:1fr}
+  .progress-box{padding:16px}
+}
+
+
+/* V13 — refined iconography & readable navigation */
+.navbtn{
+  font-size:14px;
+  font-weight:750;
+  padding:12px 12px;
+  gap:11px;
+}
+.navbtn .navicon{
+  width:21px;
+  min-width:21px;
+  height:21px;
+  display:grid;
+  place-items:center;
+  color:#b9d0c4;
+}
+.navbtn.active .navicon,
+.navbtn:hover .navicon{color:#f5fbf8}
+.navicon svg,
+.sidebar-logo svg,
+.top-icon svg{
+  width:18px;
+  height:18px;
+  stroke:currentColor;
+  fill:none;
+  stroke-width:1.9;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+.sidebar-logo{
+  width:38px;
+  height:38px;
+  border-radius:11px;
+  display:grid;
+  place-items:center;
+  background:rgba(255,255,255,.11);
+  color:#fff;
+}
+.top-icon{
+  width:36px;
+  height:36px;
+  border-radius:10px;
+  border:1px solid var(--line);
+  background:#fff;
+  color:#6f8278;
+  display:grid;
+  place-items:center;
+  padding:0;
+}
+.top-icon svg{width:16px;height:16px}
+.sidebar-brand strong{font-size:14px}
+.sidebar-brand span{font-size:10px}
+.nav-group-title{font-size:10px}
+.side-footer{font-size:11px}
+
+.page-head h1{font-size:29px}
+.page-head p{font-size:13px}
+.cardtitle{font-size:15px}
+.cardsub{font-size:11px}
+th{font-size:10px}
+td{font-size:13px}
+.btn{font-size:12px}
+
+@media(max-width:980px){
+  .navbtn{
+    font-size:0;
+    justify-content:center;
+    padding:11px 8px;
+  }
+  .navbtn .navicon{width:22px}
+  .sidebar-brand strong,.sidebar-brand span{display:none}
+}
+@media(max-width:720px){
+  .navbtn{
+    font-size:10px;
+    line-height:1.15;
+    padding:7px 4px;
+  }
+  .navbtn .navicon{
+    width:20px;
+    height:20px;
+  }
+}
+
+
+/* V14 — student-centric setoran workflow */
+.setoran-toolbar{
+  display:grid;
+  grid-template-columns:minmax(260px,1fr) 170px 145px auto;
+  gap:8px;
+  align-items:center;
+}
+.date-quick{min-width:145px}
+.setoran-guide{
+  margin:10px 0;
+  padding:8px 11px;
+  border:1px dashed #dce6df;
+  background:#f8fbf9;
+  color:#75857d;
+  border-radius:9px;
+  font-size:11px;
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+}
+.spreadsheet-wrap{
+  border:1px solid #dfe8e2;
+  border-radius:11px;
+  overflow:auto;
+  background:#fff;
+}
+.spreadsheet-table{
+  width:100%;
+  min-width:1060px;
+  border-collapse:separate;
+  border-spacing:0;
+}
+.spreadsheet-table th,
+.spreadsheet-table td{
+  border-right:1px solid #edf1ee;
+  border-bottom:1px solid #e7eee9;
+  padding:9px 10px;
+  font-size:12px;
+  white-space:nowrap;
+  height:48px;
+  background:#fff;
+}
+.spreadsheet-table th{
+  position:sticky;
+  top:0;
+  z-index:8;
+  background:#f8fbf9;
+  font-size:10px;
+  color:#6f8279;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+}
+.spreadsheet-table .sticky-col{
+  position:sticky;
+  z-index:7;
+  background:#fff;
+}
+.spreadsheet-table th.sticky-col{
+  z-index:12;
+  background:#f8fbf9;
+}
+.sticky-nis{left:0;width:90px}
+.sticky-name{left:90px;width:220px}
+.spreadsheet-table tbody tr:hover td{background:#fbfdfb}
+.spreadsheet-table tbody tr:hover .sticky-col{background:#fbfdfb}
+.student-name-cell{font-weight:800;color:#244637}
+.student-nis-cell{font-weight:750;color:#718079}
+.latest-cell{
+  min-width:155px;
+}
+.latest-cell.empty-latest{color:#a2aea8}
+.latest-edit{
+  width:100%;
+  border:1px solid transparent;
+  background:transparent;
+  padding:6px 7px;
+  border-radius:7px;
+  color:inherit;
+  font:inherit;
+  outline:none;
+}
+.latest-edit:hover{
+  background:#f7faf8;
+  border-color:#e1e9e4;
+}
+.latest-edit:focus{
+  background:#fff;
+  border-color:#9fc8b2;
+  box-shadow:0 0 0 3px rgba(8,116,67,.07);
+}
+.setoran-grid-select{
+  min-width:140px;
+}
+.setoran-grid-input{
+  min-width:80px;
+}
+.cell-dirty{
+  background:#fffaf0!important;
+  box-shadow:inset 0 0 0 1px #ead7ab;
+}
+.row-no-setoran td{
+  background:#fffefa;
+}
+.history-btn{
+  white-space:nowrap;
+}
+.whole-status{
+  padding:4px 2px 0;
+}
+.whole-status-kpi{text-align:center;margin-bottom:11px}
+.whole-status-number{font-size:30px;font-weight:850;color:#214636}
+.whole-status-bar{height:12px;border-radius:99px;background:#edf2ef;overflow:hidden}
+.whole-status-bar span{display:block;height:100%;width:0;background:linear-gradient(90deg,#287b58,#62a986);border-radius:99px}
+.whole-status-foot{display:flex;justify-content:space-between;margin-top:8px;font-size:10px;color:#83918b}
+.class-stats{display:grid;gap:8px}
+.class-stat-row{
+  display:grid;grid-template-columns:42px 1fr 38px;align-items:center;gap:8px;font-size:10px;color:#6d7c75
+}
+.class-stat-bar{height:8px;background:#edf2ef;border-radius:99px;overflow:hidden}
+.class-stat-bar span{display:block;height:100%;background:linear-gradient(90deg,#2f805f,#71ad8e);border-radius:99px}
+.class-stat-number{text-align:right;font-weight:850;color:#315b49}
+@media(max-width:1100px){
+  .setoran-toolbar{grid-template-columns:1fr 150px 140px}
+  .setoran-toolbar .tool-actions{grid-column:1/-1;justify-content:flex-start}
+  .spreadsheet-wrap{max-height:none}
+}
+@media(max-width:720px){
+  .setoran-toolbar{grid-template-columns:1fr}
+  .date-quick,.filter-input{width:100%}
+  .setoran-guide{display:block}
+  .setoran-guide span{display:block;margin:2px 0}
+  .spreadsheet-wrap{max-height:none}
+}
+
+
+/* V15 — setoran table grows naturally; vertical page scroll only */
+.spreadsheet-wrap{
+  max-height:none!important;
+  overflow-x:auto;
+  overflow-y:visible;
+}
+.spreadsheet-table{
+  table-layout:auto;
+}
+.setoran-guide{
+  align-items:center;
+}
+.history-update-warning{
+  background:#fff8eb;
+  border:1px solid #f0dfbb;
+  color:#8a642d;
+}
+
+/* V16 — inline ayat guard */
+.setoran-grid-input:invalid{
+  border-color:#e2a5a0;
+  background:#fff9f8;
+}
+
+/* V17 — Catatan berorientasi perkembangan */
+.catatan-spreadsheet{min-width:1220px}
+.note-cell{min-width:220px;max-width:320px;white-space:normal!important;line-height:1.45}
+.saran-cell{min-width:220px;max-width:300px;white-space:normal!important;color:#3f6252;line-height:1.45}
+.note-related{min-width:190px;white-space:normal!important}
+.note-related strong{display:block;color:#315b49;font-size:11px}
+.note-related span{display:block;margin-top:3px;color:#87958e;font-size:10px}
+.row-no-note td{background:#fffefa}
+.note-reference-select{width:100%;min-width:230px}
+.note-preview-box{border:1px solid #e3ebe6;border-radius:10px;padding:10px 11px;background:#f9fbf9;font-size:11px;line-height:1.5;color:#60736a}
+.history-btn{border:1px solid #d4e7dc;background:#eef8f2;color:#286b50}
+.history-btn:hover{background:#e5f3eb}
+.note-history-item{border:1px solid #e3ebe6;border-radius:11px;padding:12px;background:#fbfdfb;margin-bottom:9px}
+.note-history-item:last-child{margin-bottom:0}
+.note-history-top{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+.note-history-date{font-size:10px;color:#899890;font-weight:800}
+.note-history-text{font-size:12px;color:#314d3f;line-height:1.55;white-space:pre-wrap;margin-top:5px}
+.note-history-advice{margin-top:8px;padding:9px;border-radius:9px;background:#eef8f2;color:#2c6b50;font-size:11px;line-height:1.5;white-space:pre-wrap}
+.note-history-reference{margin-top:8px;padding:8px 9px;border-radius:8px;background:#fff8eb;color:#8b6530;border:1px solid #efdfbd;font-size:10px}
+
+
+/* V18 — inline catatan editing */
+.sticky-check{
+  left:0;
+  width:38px;
+}
+.catatan-spreadsheet .sticky-nis{left:38px}
+.catatan-spreadsheet .sticky-name{left:128px}
+.catatan-spreadsheet .sticky-check{
+  z-index:13!important;
+  background:#f8fbf9!important;
+}
+.catatan-row-edit td{
+  background:#fffdf7;
+}
+.catatan-inline{
+  width:100%;
+  border:1px solid transparent;
+  background:transparent;
+  border-radius:7px;
+  padding:7px 8px;
+  font:inherit;
+  color:inherit;
+  outline:none;
+  white-space:normal;
+  line-height:1.45;
+}
+.catatan-inline:hover{
+  background:#f7faf8;
+  border-color:#e1e9e4;
+}
+.catatan-inline:focus{
+  background:#fff;
+  border-color:#9fc8b2;
+  box-shadow:0 0 0 3px rgba(8,116,67,.07);
+}
+.catatan-inline-textarea{
+  min-height:74px;
+  resize:vertical;
+}
+.catatan-inline-select{
+  min-width:210px;
+}
+.catatan-edit-cell{
+  min-width:230px;
+}
+.catatan-reference-cell{
+  min-width:200px;
+}
+.catatan-dirty{
+  background:#fffaf0!important;
+  box-shadow:inset 0 0 0 1px #ead7ab;
+}
+@media(max-width:720px){
+  .catatan-spreadsheet{min-width:1500px}
+}
+
+
+/* V19 — Setoran: safe edit mode + corrected table alignment */
+.setoran-save-hidden{display:none!important}
+.setoran-readonly .setoran-grid-input,
+.setoran-readonly .setoran-grid-select{
+  pointer-events:none;
+  background:#f7faf8;
+  color:#687971;
+  border-color:transparent;
+  cursor:default;
+}
+.setoran-edit-active .setoran-grid-input,
+.setoran-edit-active .setoran-grid-select{
+  pointer-events:auto;
+  background:#fff;
+  border-color:#d8e4dc;
+  cursor:text;
+}
+.setoran-edit-active .setoran-grid-select{cursor:pointer}
+.setoran-edit-active .setoran-grid-input[type="date"]{cursor:pointer}
+
+.page-setoran-actions{}
+
+
+/* V20 — Catatan horizontal scroll / sticky columns */
+.catatan-spreadsheet{
+  min-width: 1260px;
+}
+.catatan-spreadsheet .sticky-check{
+  left:0 !important;
+  width:42px !important;
+  min-width:42px !important;
+  max-width:42px !important;
+  z-index:14 !important;
+  box-shadow:1px 0 0 #e7eee9;
+}
+.catatan-spreadsheet .sticky-nis{
+  left:42px !important;
+  width:92px !important;
+  min-width:92px !important;
+  z-index:13 !important;
+  box-shadow:1px 0 0 #e7eee9;
+}
+.catatan-spreadsheet .sticky-name{
+  left:134px !important;
+  width:220px !important;
+  min-width:220px !important;
+  z-index:12 !important;
+  box-shadow:2px 0 0 #e7eee9;
+}
+.catatan-spreadsheet thead .sticky-check,
+.catatan-spreadsheet thead .sticky-nis,
+.catatan-spreadsheet thead .sticky-name{
+  background:#f8fbf9 !important;
+}
+.catatan-spreadsheet tbody .sticky-check,
+.catatan-spreadsheet tbody .sticky-nis,
+.catatan-spreadsheet tbody .sticky-name{
+  background:#fff !important;
+}
+.catatan-spreadsheet tbody tr:hover .sticky-check,
+.catatan-spreadsheet tbody tr:hover .sticky-nis,
+.catatan-spreadsheet tbody tr:hover .sticky-name{
+  background:#fbfdfb !important;
+}
+
+/* Make horizontal scrolling a property of the table area only.
+   The sticky columns remain visible while the right-side columns move. */
+.catatan-spreadsheet-wrap{
+  overflow-x:auto;
+  overflow-y:visible;
+  position:relative;
+  border:1px solid #dfe8e2;
+  border-radius:11px;
+}
+
+/* Slightly larger drag/scroll affordance without changing page height. */
+.spreadsheet-wrap{
+  scrollbar-gutter:stable;
+}
+
+
+/* V21 — Catatan: no checkbox column, clean sticky offsets */
+.catatan-spreadsheet{
+  min-width:1220px;
+}
+.catatan-spreadsheet .sticky-nis{
+  left:0 !important;
+  width:92px !important;
+  min-width:92px !important;
+  z-index:13 !important;
+  box-shadow:1px 0 0 #e7eee9;
+}
+.catatan-spreadsheet .sticky-name{
+  left:92px !important;
+  width:220px !important;
+  min-width:220px !important;
+  z-index:12 !important;
+  box-shadow:2px 0 0 #e7eee9;
+}
+.catatan-spreadsheet thead .sticky-nis,
+.catatan-spreadsheet thead .sticky-name{
+  background:#f8fbf9 !important;
+}
+.catatan-spreadsheet tbody .sticky-nis,
+.catatan-spreadsheet tbody .sticky-name{
+  background:#fff !important;
+}
+.catatan-spreadsheet tbody tr:hover .sticky-nis,
+.catatan-spreadsheet tbody tr:hover .sticky-name{
+  background:#fbfdfb !important;
+}
+
+
+/* V22 — Catatan table geometry fix
+   Explicit column widths + fixed table layout prevent sticky columns from
+   covering the Catatan Terakhir column. */
+.catatan-spreadsheet{
+  table-layout:fixed !important;
+  width:1352px !important;
+  min-width:1352px !important;
+}
+.catatan-spreadsheet .cat-col-nis{width:92px}
+.catatan-spreadsheet .cat-col-name{width:240px}
+.catatan-spreadsheet .cat-col-class{width:70px}
+.catatan-spreadsheet .cat-col-note{width:290px}
+.catatan-spreadsheet .cat-col-advice{width:250px}
+.catatan-spreadsheet .cat-col-ref{width:200px}
+.catatan-spreadsheet .cat-col-date{width:105px}
+.catatan-spreadsheet .cat-col-actions{width:105px}
+
+.catatan-spreadsheet th,
+.catatan-spreadsheet td{
+  box-sizing:border-box;
+  overflow:hidden;
+}
+.catatan-spreadsheet th{
+  text-overflow:ellipsis;
+}
+.catatan-spreadsheet td.note-cell,
+.catatan-spreadsheet td.saran-cell,
+.catatan-spreadsheet td.note-related{
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+.catatan-spreadsheet .sticky-nis{
+  left:0 !important;
+  width:92px !important;
+  min-width:92px !important;
+  max-width:92px !important;
+  overflow:hidden;
+}
+.catatan-spreadsheet .sticky-name{
+  left:92px !important;
+  width:240px !important;
+  min-width:240px !important;
+  max-width:240px !important;
+  overflow:hidden;
+}
+.catatan-spreadsheet thead .sticky-nis,
+.catatan-spreadsheet thead .sticky-name{
+  z-index:20 !important;
+}
+.catatan-spreadsheet tbody .sticky-nis,
+.catatan-spreadsheet tbody .sticky-name{
+  z-index:15 !important;
+}
+
+@media(max-width:720px){
+  .catatan-spreadsheet{
+    width:1352px !important;
+    min-width:1352px !important;
+  }
+}
+
+
+/* V23 — Catatan row/header alignment */
+.catatan-spreadsheet td:nth-child(3),
+.catatan-spreadsheet th:nth-child(3){
+  text-align:left;
+  color:#52655d;
+  font-weight:700;
+}
+
+
+/* V24 — unified student profile note/setoran context */
+.progress-note-reference{
+  margin-top:9px;
+  padding:9px 10px;
+  border-radius:9px;
+  background:#fff8eb;
+  border:1px solid #efdfbd;
+  color:#8a662f;
+  font-size:10px;
+  line-height:1.45;
+}
+.progress-note-reference strong{
+  display:block;
+  font-size:10px;
+  margin-bottom:2px;
+}
+.progress-note-reference span{
+  color:#896c3b;
+}
+.progress-note-reference-muted{
+  background:#f7faf8;
+  border-color:#e1e9e4;
+  color:#7f8f87;
+}
+.progress-note-reference-muted span{
+  color:#899790;
+}
+
+/* V25 — bulk setoran template */
+.bulk-setoran-modal{width:min(980px,100%)}
+.bulk-template-actions{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  flex-wrap:wrap;
+  margin-bottom:12px;
+}
+.bulk-template-actions .muted{margin-left:2px}
+.btn-primary-soft{
+  border:1px solid #cfe7da;
+  background:#edf7f2;
+  color:#286a50;
+}
+.btn-primary-soft:hover{background:#e2f2e9}
+.bulk-setoran-modal .import-textarea{
+  min-height:240px;
+  white-space:pre;
+  overflow:auto;
+}
+.bulk-preview-name{color:#5b6f66;font-weight:700}
+@media(max-width:720px){
+  .bulk-template-actions{display:grid;grid-template-columns:1fr 1fr}
+  .bulk-template-actions .muted{grid-column:1/-1}
+}
+
+/* V27 — clean Excel workflow */
+.bulk-template-actions{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  flex-wrap:wrap;
+}
+.bulk-template-actions .muted{
+  flex:1;
+  min-width:240px;
+}
+.bulk-setoran-modal .import-textarea{
+  min-height:240px;
+}
+@media(max-width:720px){
+  .bulk-template-actions .btn{width:100%}
+  .bulk-template-actions .muted{width:100%}
+}
+
+/* V30 — Catatan Excel workflow */
+.bulk-template-actions{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  flex-wrap:wrap;
+}
+.bulk-template-actions .muted{
+  flex:1;
+  min-width:260px;
+}
+.bulk-catatan-modal .import-textarea{
+  min-height:240px;
+}
+
+/* V31 — unified student development profile */
+.progress-unified-hint{display:inline-block;margin-top:5px;color:#7d8d85;font-size:9px}
+
+
+/* V32 — Monitoring */
+.monitoring-filter-card{padding:14px 16px}
+.monitoring-filters{
+  display:grid;
+  grid-template-columns:170px 170px 170px 160px minmax(220px,1fr);
+  gap:10px;
+  align-items:end;
+}
+.monitoring-filter label{
+  display:block;
+  margin:0 0 5px 2px;
+  font-size:10px;
+  font-weight:850;
+  color:#708178;
+  text-transform:uppercase;
+  letter-spacing:.05em;
+}
+.monitoring-stats{margin-top:12px}
+.monitoring-table-head{
+  align-items:flex-start;
+}
+.legend-inline{
+  display:flex;
+  gap:6px;
+  flex-wrap:wrap;
+  justify-content:flex-end;
+}
+.monitor-chip{
+  display:inline-flex;
+  align-items:center;
+  padding:6px 9px;
+  border-radius:999px;
+  font-size:9px;
+  font-weight:800;
+}
+.monitor-chip-done{
+  background:#edf8f2;
+  color:#2c6c51;
+  border:1px solid #d2e9dc;
+}
+.monitor-chip-pending{
+  background:#f8f2e8;
+  color:#80623b;
+  border:1px solid #ead9bb;
+}
+.monitoring-table-wrap{
+  max-height:none!important;
+  overflow-x:auto;
+  overflow-y:visible;
+}
+.monitoring-current-table{
+  min-width:1050px;
+  table-layout:fixed;
+}
+.monitoring-current-table .sticky-nis{
+  left:0!important;
+  width:92px!important;
+  min-width:92px!important;
+  max-width:92px!important;
+  z-index:15!important;
+}
+.monitoring-current-table .sticky-name{
+  left:92px!important;
+  width:240px!important;
+  min-width:240px!important;
+  max-width:240px!important;
+  z-index:14!important;
+}
+.monitoring-current-table th,
+.monitoring-current-table td{
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+.monitoring-current-table td{
+  height:50px;
+}
+.monitoring-done-row td{background:#fff}
+.monitoring-pending-row td{background:#fffdf8}
+.monitoring-current-table tbody tr:hover td{background:#fbfdfb}
+.monitoring-current-table tbody tr:hover .sticky-nis,
+.monitoring-current-table tbody tr:hover .sticky-name{background:#fbfdfb!important}
+.monitor-status{
+  display:inline-flex;
+  align-items:center;
+  gap:5px;
+  padding:5px 8px;
+  border-radius:8px;
+  font-size:10px;
+  font-weight:850;
+}
+.monitor-status-done{background:#edf8f2;color:#296a4f}
+.monitor-status-pending{background:#f9f1e4;color:#84643b}
+.monitor-setoran-detail strong{display:block;color:#315b49;font-size:11px}
+.monitor-setoran-detail span{display:block;color:#89978f;font-size:10px;margin-top:2px}
+.monitor-day-head{
+  min-width:116px;
+  text-align:center!important;
+}
+.monitor-date-label{
+  font-size:10px;
+  font-weight:850;
+  color:#355b4a;
+}
+.monitor-date-week{
+  font-size:9px;
+  color:#8a9891;
+  margin-top:2px;
+}
+.monitor-cell{
+  min-width:116px;
+  max-width:116px;
+  text-align:center;
+  vertical-align:middle!important;
+  padding:6px!important;
+}
+.monitor-cell-setor{
+  background:#f5faf7!important;
+}
+.monitor-cell-empty{
+  background:#fffdf8!important;
+  color:#c1a77d;
+}
+.monitor-cell-content strong{
+  display:block;
+  font-size:10px;
+  color:#2e614c;
+}
+.monitor-cell-content span{
+  display:block;
+  font-size:9px;
+  color:#76877f;
+  margin-top:2px;
+}
+.monitor-cell-content em{
+  display:inline-block;
+  margin-top:2px;
+  padding:2px 5px;
+  border-radius:6px;
+  font-size:8px;
+  font-style:normal;
+  background:#eef8f2;
+  color:#3a7058;
+}
+.monitor-cell-empty .empty-mark{
+  font-size:14px;
+  font-weight:900;
+  color:#b9945b;
+}
+.monitoring-range-table{
+  min-width:calc(332px + 116px);
+}
+.monitoring-range-table .sticky-nis{
+  left:0!important;
+  width:92px!important;
+  min-width:92px!important;
+  max-width:92px!important;
+  z-index:15!important;
+}
+.monitoring-range-table .sticky-name{
+  left:92px!important;
+  width:240px!important;
+  min-width:240px!important;
+  max-width:240px!important;
+  z-index:14!important;
+}
+.monitoring-range-table th,
+.monitoring-range-table td{
+  border-right:1px solid #e9eeeb;
+}
+.monitoring-no-data{
+  color:#a7b1ac;
+  font-size:11px;
+}
+@media(max-width:1100px){
+  .monitoring-filters{
+    grid-template-columns:repeat(3,minmax(0,1fr));
+  }
+}
+@media(max-width:720px){
+  .monitoring-filters{
+    grid-template-columns:1fr 1fr;
+  }
+  .monitoring-search{grid-column:1/-1}
+  .legend-inline{justify-content:flex-start}
+}
+@media(max-width:520px){
+  .monitoring-filters{grid-template-columns:1fr}
+  .monitoring-search{grid-column:auto}
+}
+
+
+/* V34 — Monitoring table navigation */
+.monitoring-table-card{
+  padding:0;
+  overflow:hidden;
+}
+.monitoring-tabs{
+  display:flex;
+  gap:4px;
+  padding:10px 12px 0;
+  border-bottom:1px solid #e1eae5;
+  background:#fbfdfc;
+}
+.monitoring-tab{
+  position:relative;
+  flex:0 0 auto;
+  min-width:210px;
+  padding:10px 14px 12px;
+  border:0;
+  border-radius:10px 10px 0 0;
+  background:transparent;
+  text-align:left;
+  color:#7a8a83;
+  cursor:pointer;
+  transition:.15s ease;
+}
+.monitoring-tab:hover{
+  background:#f3f8f5;
+  color:#365b49;
+}
+.monitoring-tab.active{
+  background:#fff;
+  color:#176747;
+}
+.monitoring-tab.active::after{
+  content:"";
+  position:absolute;
+  left:12px;
+  right:12px;
+  bottom:-1px;
+  height:3px;
+  border-radius:3px 3px 0 0;
+  background:#0b7a4b;
+}
+.monitoring-tab-title{
+  display:block;
+  font-size:12px;
+  font-weight:850;
+}
+.monitoring-tab-sub{
+  display:block;
+  margin-top:3px;
+  font-size:9px;
+  color:#899790;
+  font-weight:600;
+}
+.monitoring-tab.active .monitoring-tab-sub{
+  color:#658277;
+}
+.monitoring-panel{
+  padding:14px 16px 16px;
+}
+.monitoring-panel.hidden{
+  display:none!important;
+}
+.monitoring-panel .cardhead{
+  padding:0 0 12px;
+}
+.monitoring-panel .spreadsheet-wrap{
+  border-radius:10px;
+}
+@media(max-width:720px){
+  .monitoring-tabs{
+    overflow-x:auto;
+    scrollbar-width:none;
+  }
+  .monitoring-tabs::-webkit-scrollbar{
+    display:none;
+  }
+  .monitoring-tab{
+    min-width:180px;
+  }
+}
+
+
+/* V35 — Monitoring period cells: cleaner, lighter and denser */
+.monitoring-range-table{
+  min-width:calc(332px + 104px);
+}
+.monitor-cell{
+  min-width:104px!important;
+  max-width:104px!important;
+  width:104px!important;
+  padding:7px 5px!important;
+  text-align:center!important;
+  vertical-align:middle!important;
+  cursor:pointer;
+}
+.monitor-cell-setor{
+  background:#f7fbf8!important;
+}
+.monitor-cell-setor:hover{
+  background:#eef7f1!important;
+}
+.monitor-progress-cell{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:2px;
+  min-height:54px;
+}
+.monitor-surah{
+  max-width:96px;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  font-size:10px;
+  font-weight:850;
+  color:#285a47;
+}
+.monitor-ayat{
+  font-size:9px;
+  color:#7b8b84;
+  line-height:1.2;
+}
+.monitor-status-mini{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-width:46px;
+  padding:2px 5px;
+  margin-top:1px;
+  border-radius:999px;
+  font-size:8px;
+  line-height:1.1;
+  font-weight:850;
+}
+.monitor-status-mini.is-lancar{
+  background:#eaf7f0;
+  color:#2f7053;
+}
+.monitor-status-mini.is-mengulang{
+  background:#fff5e7;
+  color:#8a6432;
+}
+.monitor-cell-empty{
+  background:#fffdfa!important;
+}
+.monitor-cell-empty .empty-mark{
+  display:inline-flex;
+  width:26px;
+  height:26px;
+  align-items:center;
+  justify-content:center;
+  color:#bc8c4f;
+  font-size:17px;
+  font-weight:500;
+}
+.monitor-day-head{
+  min-width:104px!important;
+  width:104px!important;
+  padding:8px 4px!important;
+}
+.monitor-date-label{
+  font-size:10px;
+}
+.monitor-date-week{
+  font-size:8px;
+}
+
+/* Keep the matrix readable without oversized controls. */
+.monitoring-range-table td{
+  height:64px;
+}
+@media(max-width:720px){
+  .monitor-cell,
+  .monitor-day-head{
+    min-width:100px!important;
+    width:100px!important;
+    max-width:100px!important;
+  }
+}
+
+
+/* V36 — Laporan */
+.laporan-filter-card{padding:14px 16px}
+.laporan-filters{
+  display:grid;
+  grid-template-columns:150px 120px 130px 140px 150px 145px 145px;
+  gap:9px;
+  align-items:end;
+}
+.laporan-filter label{
+  display:block;
+  margin:0 0 5px 2px;
+  font-size:10px;
+  font-weight:850;
+  color:#708178;
+  text-transform:uppercase;
+  letter-spacing:.05em;
+}
+.laporan-custom-date.hidden{display:none}
+.laporan-period-info{
+  margin-top:11px;
+  padding:8px 10px;
+  border:1px dashed #dce6df;
+  border-radius:8px;
+  background:#f8fbf9;
+  color:#667a70;
+  font-size:10px;
+}
+.laporan-period-info strong{color:#315b49}
+.laporan-stats{margin-top:12px}
+.laporan-grid{margin-top:12px}
+.laporan-summary-list{padding-top:3px}
+.lap-summary-row{
+  display:flex;
+  justify-content:space-between;
+  gap:8px;
+  margin-top:12px;
+  font-size:10px;
+  color:#6f7f77;
+}
+.lap-summary-row strong{color:#2d634d}
+.lap-summary-bar{
+  height:9px;
+  margin-top:6px;
+  border-radius:99px;
+  background:#edf2ef;
+  overflow:hidden;
+}
+.lap-summary-bar span{
+  display:block;
+  height:100%;
+  width:0;
+  border-radius:99px;
+  background:linear-gradient(90deg,#2d7c58,#6fb18f);
+}
+.laporan-table-wrap{
+  max-height:none!important;
+  overflow-x:auto;
+  overflow-y:visible;
+}
+.laporan-table{
+  min-width:1150px;
+  table-layout:fixed;
+}
+.laporan-table th,
+.laporan-table td{
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+.lap-note-preview{
+  max-width:260px;
+}
+.lap-kelas-list{display:grid;gap:8px}
+.lap-kelas-item{
+  border:1px solid #e3ebe6;
+  border-radius:10px;
+  padding:10px 11px;
+  background:#fbfdfb;
+}
+.lap-kelas-top{
+  display:flex;
+  justify-content:space-between;
+  gap:8px;
+  color:#315b49;
+  font-size:11px;
+}
+.lap-kelas-top span{color:#89978f;font-size:9px}
+.lap-kelas-line{
+  display:grid;
+  grid-template-columns:1fr auto 1fr auto 1fr auto;
+  gap:5px;
+  margin-top:8px;
+  font-size:9px;
+  color:#829089;
+}
+.lap-kelas-line b{color:#315b49}
+.laporan-note-list{display:grid;gap:8px}
+.lap-note-item{
+  padding:9px 10px;
+  border:1px solid #e4ebe7;
+  border-radius:9px;
+  background:#fbfdfb;
+  color:#486056;
+  font-size:10px;
+  line-height:1.45;
+}
+.lap-note-head{
+  display:flex;
+  justify-content:space-between;
+  gap:8px;
+  margin-bottom:4px;
+}
+.lap-note-head strong{color:#2d5948}
+.lap-note-head span{color:#8c9892;font-size:9px}
+.lap-note-item small{display:block;margin-top:4px;color:#6b8678}
+.laporan-concept-card{margin-top:12px}
+.laporan-concept-grid{
+  display:grid;
+  grid-template-columns:repeat(5,minmax(0,1fr));
+  gap:9px;
+}
+.laporan-concept-grid>div{
+  padding:11px;
+  border:1px solid #e2ebe6;
+  border-radius:10px;
+  background:#fbfdfb;
+}
+.laporan-concept-grid h4{
+  margin:0 0 5px;
+  font-size:11px;
+  color:#2f604e;
+}
+.laporan-concept-grid p{
+  margin:0;
+  font-size:9px;
+  color:#7b8982;
+  line-height:1.5;
+}
+@media(max-width:1200px){
+  .laporan-filters{
+    grid-template-columns:repeat(4,minmax(0,1fr));
+  }
+}
+@media(max-width:720px){
+  .laporan-filters{
+    grid-template-columns:1fr 1fr;
+  }
+  .laporan-concept-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:520px){
+  .laporan-filters,.laporan-concept-grid{grid-template-columns:1fr}
+}
+
+/* V37 — Laporan nav */
+.navbtn[data-page="laporan"] .navicon{opacity:.95}
+
+
+/* V39 — Rapor */
+.rapor-filter-card{padding:14px 16px}
+.rapor-filters{
+  display:grid;
+  grid-template-columns:160px 160px 150px minmax(240px,1fr) 145px 145px;
+  gap:9px;
+  align-items:end;
+}
+.rapor-filter label{
+  display:block;
+  margin:0 0 5px 2px;
+  font-size:10px;
+  font-weight:850;
+  color:#708178;
+  text-transform:uppercase;
+  letter-spacing:.05em;
+}
+.rapor-period-info{
+  margin-top:11px;
+  padding:8px 10px;
+  border:1px dashed #dce6df;
+  border-radius:8px;
+  background:#f8fbf9;
+  color:#667a70;
+  font-size:10px;
+}
+.rapor-period-info strong{color:#315b49}
+.rapor-actions{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin-top:12px;
+  padding-top:12px;
+  border-top:1px solid #edf1ee;
+}
+.rapor-preview-card{
+  margin-top:12px;
+}
+.rapor-preview{
+  display:flex;
+  justify-content:center;
+  padding:8px;
+  background:#f2f5f3;
+  border-radius:10px;
+}
+.rapor-preview-empty{
+  width:100%;
+  padding:50px 20px;
+  text-align:center;
+  color:#8a9891;
+  font-size:12px;
+}
+.rapor-paper{
+  width:min(100%,780px);
+  min-height:1030px;
+  background:#fff;
+  border:1px solid #dfe7e2;
+  box-shadow:0 8px 28px rgba(26,57,43,.08);
+  padding:34px 38px;
+  color:#334f43;
+}
+.rapor-paper-head{
+  text-align:center;
+  padding-bottom:14px;
+  border-bottom:2px solid #176a4b;
+}
+.rapor-school{
+  font-size:14px;
+  font-weight:900;
+  letter-spacing:.05em;
+  color:#174d39;
+}
+.rapor-title{
+  font-size:18px;
+  font-weight:900;
+  margin-top:5px;
+  color:#174d39;
+}
+.rapor-period{
+  margin-top:5px;
+  font-size:10px;
+  color:#7b8b83;
+}
+.rapor-identity-grid{
+  display:grid;
+  grid-template-columns:2fr 1fr 1fr;
+  gap:14px;
+  padding:15px 0 10px;
+}
+.rapor-identity-grid span,
+.rapor-metric-grid span{
+  display:block;
+  color:#8a9791;
+  font-size:9px;
+  margin-bottom:3px;
+}
+.rapor-identity-grid strong{
+  color:#295a47;
+  font-size:11px;
+}
+.rapor-section-title{
+  margin-top:13px;
+  margin-bottom:7px;
+  font-size:11px;
+  font-weight:900;
+  color:#205a43;
+}
+.rapor-metric-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:7px;
+}
+.rapor-metric-grid>div{
+  padding:9px 10px;
+  background:#f7faf8;
+  border:1px solid #e1eae4;
+  border-radius:8px;
+}
+.rapor-metric-grid strong{
+  font-size:14px;
+  color:#285e48;
+}
+.rapor-mini-table{
+  width:100%;
+  border-collapse:collapse;
+  font-size:9px;
+}
+.rapor-mini-table th,
+.rapor-mini-table td{
+  padding:6px 7px;
+  border:1px solid #e2e9e5;
+  text-align:left;
+}
+.rapor-mini-table th{
+  color:#fff;
+  background:#23714f;
+  font-weight:800;
+}
+.rapor-mini-table tr:nth-child(even){background:#f9fbfa}
+.rapor-notes-box{
+  border:1px solid #e4ebe7;
+  border-radius:8px;
+  padding:9px;
+  background:#fbfdfb;
+}
+.rapor-note-row{
+  padding:7px 0;
+  border-bottom:1px dashed #e2e9e5;
+}
+.rapor-note-row:last-child{border-bottom:0}
+.rapor-note-row strong{
+  display:block;
+  font-size:9px;
+  color:#7a8a82;
+  margin-bottom:2px;
+}
+.rapor-note-row span{
+  display:block;
+  font-size:10px;
+  line-height:1.45;
+}
+.rapor-note-row small{
+  display:block;
+  margin-top:3px;
+  color:#72857c;
+}
+.rapor-description{
+  border-left:3px solid #27815b;
+  padding:10px 11px;
+  background:#f6faf8;
+  border-radius:0 8px 8px 0;
+  font-size:10px;
+  line-height:1.55;
+  color:#466154;
+}
+.rapor-signature-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:60px;
+  margin-top:38px;
+  font-size:9px;
+  color:#77877f;
+}
+.rapor-signature-space{height:55px}
+.rapor-signature-grid strong{
+  color:#50645a;
+  font-size:9px;
+}
+.rapor-footer-note{
+  margin-top:34px;
+  padding-top:8px;
+  border-top:1px solid #e7ede9;
+  text-align:center;
+  color:#9aa59f;
+  font-size:8px;
+}
+.rapor-konsep-card{margin-top:12px}
+.rapor-concept-grid{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:8px;
+}
+.rapor-concept-grid>div{
+  padding:10px;
+  border:1px solid #e1eae4;
+  border-radius:9px;
+  background:#fbfdfb;
+}
+.rapor-concept-grid strong{
+  display:block;
+  font-size:10px;
+  color:#2d614d;
+  margin-bottom:4px;
+}
+.rapor-concept-grid span{
+  display:block;
+  font-size:9px;
+  color:#7c8b84;
+  line-height:1.45;
+}
+@media(max-width:1200px){
+  .rapor-filters{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+@media(max-width:720px){
+  .rapor-filters{grid-template-columns:1fr 1fr}
+  .rapor-identity-grid,.rapor-metric-grid{grid-template-columns:1fr 1fr}
+  .rapor-concept-grid{grid-template-columns:1fr 1fr}
+  .rapor-paper{padding:24px 20px}
+}
+@media(max-width:520px){
+  .rapor-filters,.rapor-identity-grid,.rapor-metric-grid,.rapor-concept-grid{grid-template-columns:1fr}
+  .rapor-actions .btn{width:100%}
+}
+
+/* V40 — Rapor paper size + school logo */
+.rapor-logo-wrap{
+  display:flex;
+  justify-content:center;
+  margin-bottom:7px;
+}
+.rapor-logo{
+  width:58px;
+  height:58px;
+  object-fit:contain;
+}
+.rapor-paper{
+  box-sizing:border-box;
+}
+
+/* V41 — Juziyah */
+.juziyah-stats{margin-top:12px}
+.juziyah-toolbar{
+  display:grid;
+  grid-template-columns:minmax(260px,1fr) 160px 170px auto;
+  gap:9px;
+  align-items:center;
+  margin-bottom:12px;
+}
+.juziyah-table{
+  min-width:1180px;
+  table-layout:fixed;
+}
+.juziyah-table th:nth-child(1){width:90px}
+.juziyah-table th:nth-child(2){width:220px}
+.juziyah-table th:nth-child(3){width:75px}
+.juziyah-table th:nth-child(4){width:70px}
+.juziyah-table th:nth-child(5){width:105px}
+.juziyah-table th:nth-child(6){width:80px}
+.juziyah-table th:nth-child(7){width:105px}
+.juziyah-table th:nth-child(8){width:280px}
+.juziyah-table th:nth-child(9){width:220px}
+.juziyah-note-cell{
+  white-space:normal!important;
+  line-height:1.4;
+}
+.juziyah-certificate-info{margin-top:12px}
+.juziyah-cert-info-grid{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:8px;
+}
+.juziyah-cert-info-grid>div{
+  border:1px solid #e2ebe6;
+  border-radius:9px;
+  background:#fbfdfb;
+  padding:10px;
+}
+.juziyah-cert-info-grid strong{
+  display:block;
+  font-size:9px;
+  color:#2b614d;
+  margin-bottom:3px;
+}
+.juziyah-cert-info-grid span{
+  display:block;
+  font-size:9px;
+  color:#7d8b84;
+  line-height:1.4;
+}
+.progress-juziyah-item{
+  border:1px solid #e1eae4;
+  border-radius:10px;
+  padding:10px 11px;
+  background:#fbfdfb;
+  margin-bottom:8px;
+}
+.progress-juziyah-main{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  align-items:flex-start;
+}
+.progress-juziyah-title{
+  font-size:12px;
+  font-weight:900;
+  color:#2d614c;
+}
+.progress-juziyah-meta{
+  margin-top:3px;
+  color:#86958e;
+  font-size:9px;
+}
+.progress-juziyah-note{
+  margin-top:8px;
+  padding:8px 9px;
+  background:#f6faf8;
+  border-radius:8px;
+  color:#597066;
+  font-size:10px;
+  line-height:1.45;
+}
+.rapor-paper .rapor-logo{width:58px;height:58px}
+
+@media(max-width:1000px){
+  .juziyah-toolbar{grid-template-columns:1fr 1fr}
+  .juziyah-toolbar .data-search{grid-column:1/-1}
+  .juziyah-cert-info-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:720px){
+  .juziyah-toolbar{grid-template-columns:1fr}
+  .juziyah-toolbar .data-search{grid-column:auto}
+  .juziyah-cert-info-grid{grid-template-columns:1fr}
+}
+
+/* V42 — Juziyah fix */
+.progress-juziyah-item{
+  border:1px solid #e1eae4;border-radius:10px;padding:10px 11px;
+  background:#fbfdfb;margin-bottom:8px;
+}
+.progress-juziyah-main{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+.progress-juziyah-title{font-size:12px;font-weight:900;color:#2d614c}
+.progress-juziyah-meta{margin-top:3px;color:#86958e;font-size:9px}
+.progress-juziyah-note{margin-top:8px;padding:8px 9px;background:#f6faf8;border-radius:8px;color:#597066;font-size:10px;line-height:1.45}
+.juziyah-table{min-width:1180px;table-layout:fixed}
+.juziyah-table th:nth-child(1){width:90px}.juziyah-table th:nth-child(2){width:220px}.juziyah-table th:nth-child(3){width:75px}
+.juziyah-table th:nth-child(4){width:70px}.juziyah-table th:nth-child(5){width:105px}.juziyah-table th:nth-child(6){width:80px}
+.juziyah-table th:nth-child(7){width:105px}.juziyah-table th:nth-child(8){width:280px}.juziyah-table th:nth-child(9){width:220px}
+.juziyah-note-cell{white-space:normal!important;line-height:1.4}
+
+/* V44 — Juziyah table follows Setoran/Hafalan workflow */
+.juziyah-table{
+  min-width:1320px!important;
+  table-layout:fixed!important;
+}
+.juziyah-table th:nth-child(1){width:88px!important}
+.juziyah-table th:nth-child(2){width:225px!important}
+.juziyah-table th:nth-child(3){width:72px!important}
+.juziyah-table th:nth-child(4){width:95px!important}
+.juziyah-table th:nth-child(5){width:105px!important}
+.juziyah-table th:nth-child(6){width:76px!important}
+.juziyah-table th:nth-child(7){width:105px!important}
+.juziyah-table th:nth-child(8){width:280px!important}
+.juziyah-table th:nth-child(9){width:270px!important}
+.juziyah-table td{
+  height:58px;
+  vertical-align:middle;
+}
+.juziyah-subline{
+  margin-top:3px;
+  font-size:8.5px;
+  color:#8a9891;
+}
+.juziyah-empty-badge{
+  display:inline-flex;
+  padding:4px 7px;
+  border-radius:999px;
+  background:#f5f7f6;
+  color:#8a9690;
+  border:1px solid #e2e8e4;
+  font-size:9px;
+  font-weight:800;
+}
+.juziyah-note-cell{
+  white-space:normal!important;
+  line-height:1.35;
+  color:#5d7066;
+}
+
+/* V45 — all Juz per student in one row */
+.juziyah-table th:nth-child(4){width:245px!important}
+.juziyah-juz-cell{
+  white-space:normal!important;
+  vertical-align:middle!important;
+}
+.juziyah-juz-chip{
+  display:inline-flex;
+  align-items:center;
+  gap:5px;
+  margin:2px 3px 2px 0;
+  padding:4px 7px;
+  border-radius:7px;
+  border:1px solid #dfe8e3;
+  background:#f8fbf9;
+  color:#315e4c;
+  font-size:9px;
+  line-height:1.1;
+  white-space:nowrap;
+}
+.juziyah-juz-chip strong{
+  font-size:9px;
+}
+.juziyah-juz-chip small{
+  font-size:8px;
+  font-weight:800;
+  color:#698178;
+}
+.juziyah-juz-chip.is-lulus{
+  background:#eef8f2;
+  border-color:#d5e9dc;
+}
+.juziyah-juz-chip.is-lulus small{color:#367355}
+.juziyah-juz-chip.is-belum{
+  background:#fff7ea;
+  border-color:#eedfc7;
+}
+.juziyah-juz-chip.is-belum small{color:#8a6b3b}
+.juziyah-empty-text{
+  color:#a0aba5;
+  font-size:9px;
+}
+
+/* V46 — multi-Juz sessions + certificate review */
+.juziyah-juz-grid{
+  display:grid;
+  grid-template-columns:repeat(6,minmax(0,1fr));
+  gap:6px;
+  max-height:180px;
+  overflow:auto;
+  padding:8px;
+  border:1px solid #dfe8e3;
+  border-radius:9px;
+  background:#fbfdfb;
+}
+.juziyah-juz-option{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  padding:7px 8px;
+  border:1px solid #e1e9e4;
+  border-radius:7px;
+  background:#fff;
+  cursor:pointer;
+  font-size:9px;
+  color:#62746b;
+}
+.juziyah-juz-option input{margin:0}
+.juziyah-juz-option.selected{
+  border-color:#9ac8b2;
+  background:#edf8f2;
+  color:#2d6a50;
+  font-weight:800;
+}
+.juziyah-juz-grid.edit-single{
+  grid-template-columns:repeat(6,minmax(0,1fr));
+}
+.juziyah-session-list{display:grid;gap:8px}
+.juziyah-session-item{
+  width:100%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  padding:11px 12px;
+  border:1px solid #e2eae5;
+  border-radius:10px;
+  background:#fbfdfb;
+  text-align:left;
+  cursor:pointer;
+}
+.juziyah-session-item:hover{background:#f2f8f4;border-color:#b9d9c7}
+.juziyah-session-item strong{display:block;font-size:11px;color:#2d604d}
+.juziyah-session-item span{display:block;margin-top:3px;font-size:9px;color:#7d8c85}
+.juziyah-session-meta{font-size:9px;font-weight:800;color:#3b7459;white-space:nowrap}
+.juziyah-preview-modal{width:min(820px,100%)}
+.juziyah-certificate-preview{background:#eef2f0;padding:10px;display:flex;justify-content:center;max-height:75vh;overflow:auto}
+.juziyah-certificate-paper{
+  width:700px;min-height:980px;background:#fff;border:1px solid #dce5df;
+  box-shadow:0 8px 28px rgba(20,60,40,.08);padding:45px 50px;text-align:center;
+  color:#365248;
+}
+.juziyah-certificate-paper img{width:70px;height:70px;object-fit:contain;margin-bottom:10px}
+.jcp-school{font-size:15px;font-weight:900;color:#174d39}
+.jcp-title{font-size:25px;font-weight:900;color:#174d39;margin-top:8px}
+.jcp-sub{font-size:11px;color:#819089;margin-top:8px;line-height:1.5}
+.jcp-name{font-size:24px;font-weight:900;color:#285e48;margin-top:18px}
+.jcp-meta{font-size:11px;color:#7b8982;margin-top:4px}
+.jcp-juz{font-size:22px;font-weight:900;color:#2b7252;margin-top:22px;letter-spacing:.04em}
+.jcp-detail{font-size:10px;color:#74837b;margin-top:10px}
+.jcp-note{margin:20px auto 0;max-width:520px;padding:10px;background:#f6faf8;border-radius:8px;font-size:10px;line-height:1.5;color:#5b7167}
+.jcp-footer{margin-top:90px;padding-top:8px;border-top:1px solid #e7ede9;font-size:8px;color:#9aa59f}
+.jcp-sign{display:grid;grid-template-columns:1fr 1fr;gap:60px;margin-top:25px;font-size:9px;color:#6d7e75;line-height:1.8}
+@media(max-width:720px){
+  .juziyah-juz-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .juziyah-certificate-paper{width:100%;min-height:900px;padding:28px 20px}
+  .jcp-title{font-size:20px}.jcp-name{font-size:20px}.jcp-juz{font-size:18px}
+}
+
+/* V48 — deterministic modal layering */
+.modal{
+  z-index:1000!important;
+}
+#noticeModal,
+#confirmModal{
+  z-index:1100!important;
+}
+#juziyahCertificatePickerModal,
+#juziyahCertificatePreviewModal{
+  z-index:1200!important;
+}
+.juziyah-session-item:focus{
+  outline:3px solid rgba(8,116,67,.16);
+  outline-offset:2px;
+}
+
+/* V48 — certificate popup timing and layering */
+.modal{z-index:1000!important}
+#noticeModal,#confirmModal{z-index:1100!important}
+#juziyahCertificatePickerModal,#juziyahCertificatePreviewModal{z-index:1200!important}
+.juziyah-session-item:focus{outline:3px solid rgba(8,116,67,.16);outline-offset:2px}
+
+/* V50 — Manajemen kelas siswa */
+.data-toolbar .tool-actions{display:flex;gap:6px;flex-wrap:wrap}
+.class-manager-selected{margin:12px 0;padding:10px 11px;border:1px solid #dfe8e3;border-radius:9px;background:#f8fbf9}
+.class-manager-selected strong{display:block;font-size:11px;color:#2c604c}
+.class-manager-selected span{display:block;margin-top:3px;font-size:9px;color:#7c8c84}
+.class-manager-ops{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:12px 0}
+.class-manager-op{border:1px solid #e1e9e4;background:#fff;border-radius:10px;text-align:left;padding:10px;cursor:pointer;color:#64766d}
+.class-manager-op strong{display:block;font-size:10px;color:#2d604c}
+.class-manager-op span{display:block;margin-top:3px;font-size:8.5px;color:#87948e}
+.class-manager-op.active{background:#edf8f2;border-color:#96c6ad;box-shadow:inset 0 0 0 1px #d0e7da}
+.class-manager-preview{margin-top:10px;max-height:220px;overflow:auto}
+.class-manager-summary{border:1px solid #e3ebe6;border-radius:9px;background:#fbfdfb;padding:10px;color:#5b6f65;font-size:10px;line-height:1.45}
+.class-manager-summary>strong{display:block;color:#2d604c;margin-bottom:4px}
+.class-manager-row{display:flex;justify-content:space-between;gap:10px;padding:6px 0;border-top:1px dashed #e5ebe7}
+.class-manager-row small{color:#8a9891}
+.class-manager-row b{color:#2f7053}
+@media(max-width:900px){
+  .data-toolbar .tool-actions{display:grid;grid-template-columns:repeat(2,1fr);width:100%}
+  .class-manager-ops{grid-template-columns:1fr}
+}
+
+/* V51 — Batch Rapor Review */
+.rapor-batch-review-modal{
+  width:min(980px,100%);
+}
+.rapor-batch-controls{
+  display:grid;
+  grid-template-columns:minmax(250px,1fr) auto auto;
+  gap:8px;
+  margin:12px 0;
+  align-items:center;
+}
+.rapor-batch-review-paper{
+  max-height:70vh;
+  overflow:auto;
+  padding:12px;
+  border-radius:10px;
+  background:#eef2f0;
+  display:flex;
+  justify-content:center;
+}
+.rapor-batch-review-paper .rapor-preview{
+  padding:0;
+  background:transparent;
+  width:100%;
+}
+.rapor-batch-review-paper .rapor-paper{
+  flex:0 0 auto;
+}
+.rapor-batch-footer{
+  flex-wrap:wrap;
+}
+.rapor-batch-footer .btn{
+  white-space:nowrap;
+}
+@media(max-width:720px){
+  .rapor-batch-controls{
+    grid-template-columns:1fr 1fr;
+  }
+  .rapor-batch-controls select{
+    grid-column:1/-1;
+  }
+  .rapor-batch-review-paper{
+    max-height:62vh;
+    padding:6px;
+  }
+}
+
+
+/* V52 — Separate review and print/download actions */
+.rapor-actions{
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  gap:12px;
+  align-items:stretch;
+}
+.rapor-action-group{
+  padding:11px 12px 10px;
+  border:1px solid #e1e9e4;
+  border-radius:11px;
+  background:#fbfdfb;
+}
+.rapor-review-group{
+  border-color:#dce9e2;
+  background:#f6faf8;
+}
+.rapor-print-group{
+  border-color:#dfe5e2;
+  background:#fff;
+}
+.rapor-action-label{
+  font-size:9px;
+  font-weight:900;
+  letter-spacing:.08em;
+  color:#789087;
+  margin-bottom:7px;
+}
+.rapor-action-buttons{
+  display:flex;
+  gap:7px;
+  flex-wrap:wrap;
+}
+.rapor-action-buttons .btn{
+  margin:0;
+}
+.btn-review{
+  background:#edf8f2;
+  border:1px solid #cfe4d7;
+  color:#2d6a50;
+  box-shadow:none;
+}
+.btn-review:hover{
+  background:#e4f3ea;
+}
+.btn-print-secondary{
+  background:#fff;
+  border:1px solid #dce5df;
+  color:#385b4c;
+}
+.rapor-action-hint{
+  margin-top:7px;
+  font-size:8.5px;
+  color:#87958f;
+  line-height:1.35;
+}
+@media(max-width:780px){
+  .rapor-actions{
+    grid-template-columns:1fr;
+  }
+}
+
+/* V53 — startup teacher motivation */
+.teacher-motivation-modal{
+  width:min(680px, 100%);
+  padding:0;
+  overflow:hidden;
+  border:1px solid #dfe9e3;
+}
+.teacher-motivation-top{
+  padding:24px 28px 8px;
+  text-align:center;
+  background:linear-gradient(180deg,#f7fbf8 0%,#ffffff 100%);
+}
+.teacher-motivation-icon{
+  width:50px;
+  height:50px;
+  margin:0 auto 10px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:50%;
+  background:#eaf7f0;
+  color:#1f7a55;
+  font-size:24px;
+  font-weight:900;
+}
+.teacher-motivation-type{
+  text-align:center;
+  margin:10px 26px 0;
+  font-size:10px;
+  font-weight:900;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:#688178;
+}
+.teacher-motivation-text{
+  padding:10px 34px 0;
+  text-align:center;
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:20px;
+  line-height:1.6;
+  color:#214f3d;
+  font-weight:600;
+}
+.teacher-motivation-source{
+  padding:9px 24px 0;
+  text-align:center;
+  font-size:10px;
+  font-weight:800;
+  color:#7c8e85;
+}
+.teacher-motivation-message{
+  margin:22px 28px 0;
+  padding:16px 18px;
+  border:1px solid #dfebe4;
+  border-radius:12px;
+  background:#f7fbf8;
+  color:#60736a;
+  font-size:11px;
+  line-height:1.7;
+  text-align:center;
+}
+.teacher-motivation-message strong{
+  display:block;
+  margin-bottom:4px;
+  color:#2c624c;
+  font-size:13px;
+}
+.teacher-motivation-footer{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  margin-top:18px;
+  padding:13px 18px;
+  border-top:1px solid #e8eeeb;
+  background:#fff;
+}
+.teacher-motivation-footer span{
+  font-size:8.5px;
+  color:#8a9791;
+}
+@media(max-width:620px){
+  .teacher-motivation-text{
+    padding-left:20px;
+    padding-right:20px;
+    font-size:17px;
+  }
+  .teacher-motivation-message{
+    margin-left:18px;
+    margin-right:18px;
+  }
+  .teacher-motivation-footer{
+    flex-direction:column;
+    align-items:stretch;
+    text-align:center;
+  }
+}
+
+/* V54 — refined teacher appreciation tone */
+.teacher-motivation-message{
+  background:linear-gradient(180deg,#f8fbf9 0%,#f4faf6 100%);
+}
+.teacher-motivation-message strong{
+  font-size:14px;
+  letter-spacing:.01em;
+}
+.teacher-motivation-brand{
+  display:flex;
+  flex-direction:column;
+  gap:2px;
+  text-align:left;
+}
+.teacher-motivation-brand small{
+  font-size:8.5px;
+  color:#9aa6a0;
+}
+.teacher-motivation-footer{
+  align-items:center;
+}
+@media(max-width:620px){
+  .teacher-motivation-brand{text-align:center}
+}
+
+/* V55 — startup motivation independent from Firestore */
+#teacherMotivationModal.modal{
+  position:fixed!important;
+  inset:0!important;
+  z-index:1300!important;
+}
+#teacherMotivationModal.hidden{
+  display:none!important;
+}
+
+/* V57 — White-label */
+:root{
+  --brand-primary:#087443;
+  --brand-primary-dark:#075b36;
+  --brand-primary-light:#eaf6ef;
+  --brand-gold:#c9a45b;
+  --brand-page-bg:#f4f8f5;
+}
+body{background:var(--brand-page-bg)}
+.btn-primary{background:linear-gradient(135deg,var(--brand-primary),var(--brand-primary-dark))}
+.hero{background:radial-gradient(circle at 86% 22%,rgba(255,255,255,.10),transparent 24%),linear-gradient(135deg,var(--brand-primary-dark),var(--brand-primary))}
+.navbtn.active{box-shadow:inset 3px 0 0 var(--brand-gold)}
+
+/* V58 — Account / password management */
+.account-btn{
+  height:36px;
+  display:flex;
+  align-items:center;
+  gap:6px;
+  padding:0 10px;
+  border:1px solid var(--line);
+  border-radius:10px;
+  background:#fff;
+  color:#486158;
+  cursor:pointer;
+  font-size:10px;
+  font-weight:800;
+}
+.account-btn:hover{background:#f7faf8}
+.account-icon{font-size:14px;line-height:1}
+.account-modal{
+  width:min(540px,100%);
+}
+.account-profile-card{
+  display:flex;
+  align-items:center;
+  gap:11px;
+  margin-top:13px;
+  padding:11px 12px;
+  border:1px solid #e0e9e4;
+  border-radius:10px;
+  background:#f8fbf9;
+}
+.account-avatar{
+  width:40px;
+  height:40px;
+  border-radius:12px;
+  background:#e9f5ee;
+  color:#2f6d51;
+  display:grid;
+  place-items:center;
+  font-size:16px;
+  font-weight:900;
+}
+.account-profile-card strong{
+  display:block;
+  color:#2e5948;
+  font-size:11px;
+}
+.account-profile-card span{
+  display:block;
+  margin-top:3px;
+  color:#87958e;
+  font-size:9px;
+}
+.account-section{
+  margin-top:14px;
+  padding-top:14px;
+  border-top:1px solid #e8eeeb;
+}
+.account-section-title{
+  font-size:13px;
+  font-weight:900;
+  color:#2d5f4b;
+  margin-bottom:3px;
+}
+.account-password-hint{
+  padding:9px 10px;
+  border-radius:8px;
+  background:#f6faf8;
+  border:1px solid #e0eae4;
+  color:#72857b;
+  font-size:9px;
+  line-height:1.4;
+}
+.account-modal .modal-actions{
+  margin-top:15px;
+}
+@media(max-width:620px){
+  .account-btn{
+    width:36px;
+    padding:0;
+    justify-content:center;
+  }
+  .account-btn span:last-child{display:none}
+}
+
+/* V59 — Password visibility controls */
+.password-field{
+  position:relative;
+}
+.password-field .input{
+  padding-right:44px;
+}
+.password-toggle{
+  position:absolute;
+  top:50%;
+  right:9px;
+  transform:translateY(-50%);
+  width:30px;
+  height:30px;
+  display:grid;
+  place-items:center;
+  border:0;
+  border-radius:7px;
+  background:transparent;
+  color:#789087;
+  cursor:pointer;
+}
+.password-toggle:hover{
+  background:#f1f6f3;
+  color:#2f6d51;
+}
+.password-toggle:focus-visible{
+  outline:2px solid rgba(8,116,67,.24);
+  outline-offset:1px;
+}
+.eye-icon{
+  display:grid;
+  place-items:center;
+}
+.eye-icon svg{
+  width:17px;
+  height:17px;
+  fill:none;
+  stroke:currentColor;
+  stroke-width:1.7;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+.eye-hide{display:none}
+.password-toggle.is-visible .eye-show{display:none}
+.password-toggle.is-visible .eye-hide{display:grid}
+
+/* V60 — Mobile-first editing for Setoran & Catatan */
+.mobile-student-list{display:none}
+.mobile-student-card{
+  display:block;
+  border:1px solid #dfe8e3;
+  border-radius:13px;
+  background:#fff;
+  padding:13px;
+  margin-bottom:9px;
+  box-shadow:0 3px 12px rgba(30,65,48,.045);
+}
+.mobile-student-card.is-empty{
+  background:#fbfcfb;
+}
+.mobile-card-head{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:10px;
+  padding-bottom:10px;
+  border-bottom:1px solid #edf2ef;
+}
+.mobile-card-head strong{
+  display:block;
+  color:#234f3e;
+  font-size:13px;
+  font-weight:900;
+}
+.mobile-card-head span{
+  display:block;
+  margin-top:3px;
+  color:#8a9891;
+  font-size:9px;
+}
+.mobile-status,
+.mobile-note-dot{
+  flex:0 0 auto;
+  padding:5px 7px;
+  border-radius:999px;
+  font-size:8px;
+  font-weight:900;
+  white-space:nowrap;
+}
+.mobile-badge-green{background:#e9f7ef;color:#317455}
+.mobile-badge-amber{background:#fff5e5;color:#916d38}
+.mobile-note-dot{background:#f0f5f2;color:#647a6f}
+.mobile-card-latest{
+  margin-top:11px;
+  padding:10px;
+  border-radius:9px;
+  background:#f7faf8;
+}
+.mobile-card-label{
+  font-size:8px;
+  font-weight:900;
+  letter-spacing:.07em;
+  color:#86978f;
+}
+.mobile-card-surah{
+  margin-top:3px;
+  color:#2b654d;
+  font-size:13px;
+  font-weight:900;
+}
+.mobile-card-meta{
+  display:flex;
+  gap:12px;
+  margin-top:4px;
+  color:#70847a;
+  font-size:9px;
+}
+.mobile-card-actions{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto;
+  gap:7px;
+  margin-top:11px;
+}
+.mobile-card-actions .btn{
+  min-height:39px;
+  padding:8px 10px;
+  font-size:10px;
+}
+.mobile-main-action{
+  min-width:0;
+}
+.mobile-note-section{
+  margin-top:10px;
+}
+.mobile-note-text{
+  margin-top:4px;
+  color:#50665c;
+  font-size:10px;
+  line-height:1.48;
+  white-space:pre-wrap;
+}
+.mobile-note-related{
+  display:flex;
+  justify-content:space-between;
+  gap:8px;
+  margin-top:10px;
+  padding-top:8px;
+  border-top:1px dashed #e5ece8;
+  color:#84938c;
+  font-size:8.5px;
+}
+.mobile-note-related strong{
+  color:#4c665b;
+  font-size:9px;
+  text-align:right;
+}
+.mobile-card-meta-line{
+  margin-top:7px;
+  color:#909c96;
+  font-size:8.5px;
+}
+.mobile-empty{
+  border:1px dashed #dfe8e3;
+  border-radius:10px;
+  padding:26px 15px;
+  text-align:center;
+  color:#8a9791;
+  background:#fbfdfc;
+  font-size:10px;
+}
+@media(max-width:720px){
+  #page-setoran .spreadsheet-wrap,
+  #page-catatan .spreadsheet-wrap{
+    display:none!important;
+  }
+  #studentSetoranMobile,
+  #studentCatatanMobile{
+    display:block;
+  }
+  #page-setoran .setoran-guide{
+    display:none;
+  }
+  #page-setoran .setoran-toolbar{
+    display:grid!important;
+    grid-template-columns:1fr 1fr;
+    gap:7px;
+  }
+  #page-setoran .setoran-toolbar .data-search{
+    grid-column:1/-1;
+  }
+  #page-setoran .setoran-toolbar > .tool-actions{
+    grid-column:1/-1;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:7px;
+  }
+  #page-catatan .data-toolbar{
+    display:grid!important;
+    grid-template-columns:1fr 1fr;
+    gap:7px;
+  }
+  #page-catatan .data-toolbar .data-search{
+    grid-column:1/-1;
+  }
+  #page-catatan .data-toolbar > .tool-actions{
+    grid-column:1/-1;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:7px;
+  }
+  #page-catatan .data-toolbar > .tool-actions .btn{
+    width:100%;
+  }
+  #page-setoran .compact-card,
+  #page-catatan .compact-card{
+    padding:9px;
+  }
+}
+
+/* V61 — final mobile override: cards are visible, desktop table is hidden */
+@media (max-width: 720px){
+  #page-setoran .spreadsheet-wrap,
+  #page-catatan .spreadsheet-wrap{
+    display:none !important;
+  }
+  #page-setoran #studentSetoranMobile,
+  #page-catatan #studentCatatanMobile{
+    display:block !important;
+    width:100%;
+  }
+}
+@media (min-width:721px){
+  #studentSetoranMobile,
+  #studentCatatanMobile{
+    display:none !important;
+  }
+}
+
+/* V62 — Mobile navigation: show all 8 menus */
+@media (max-width:720px){
+  .sidebar{
+    position:fixed;
+    left:0;
+    right:0;
+    top:auto;
+    bottom:0;
+    height:auto;
+    min-height:92px;
+    z-index:70;
+    display:flex;
+    flex-wrap:wrap;
+    align-content:center;
+    justify-content:flex-start;
+    padding:5px 4px 6px;
+    overflow:visible;
+    border-top:1px solid rgba(255,255,255,.12);
+  }
+  .sidebar-brand,
+  .nav-group-title{
+    display:none!important;
+  }
+  .sidebar .navbtn{
+    flex:0 0 25%!important;
+    width:25%!important;
+    min-width:0!important;
+    max-width:none!important;
+    margin:0!important;
+    padding:7px 2px 6px!important;
+    gap:3px!important;
+    justify-content:center!important;
+    align-items:center!important;
+    border-radius:9px!important;
+    font-size:9px!important;
+    line-height:1.05!important;
+    text-align:center!important;
+  }
+  .sidebar .navbtn .navicon{
+    width:20px!important;
+    height:20px!important;
+    font-size:13px!important;
+    flex:0 0 20px;
+  }
+  .sidebar .navbtn .navtext{
+    display:block!important;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    max-width:100%;
+  }
+  .content{
+    padding-bottom:125px!important;
+  }
+}
+
+/* V63 — Monitoring & Laporan responsive mobile */
+.mobile-monitoring-list,.mobile-laporan-list{display:none}
+.mobile-monitor-card,.mobile-range-card,.mobile-report-card{
+  background:#fff;border:1px solid #dfe8e3;border-radius:13px;padding:12px;margin-bottom:9px;
+  box-shadow:0 3px 12px rgba(30,65,48,.045)
+}
+.mobile-monitor-head,.mobile-report-head{
+  display:flex;justify-content:space-between;align-items:flex-start;gap:10px
+}
+.mobile-monitor-head strong,.mobile-report-head strong{display:block;font-size:12px;color:#234f3e;font-weight:900}
+.mobile-monitor-head span,.mobile-report-head span{display:block;margin-top:3px;font-size:8.5px;color:#8a9891}
+.mobile-monitor-status,.mobile-report-count{
+  padding:5px 7px;border-radius:999px;font-size:8px;font-weight:900;white-space:nowrap
+}
+.mobile-monitor-pending{background:#f8f2e8;color:#80623b}
+.mobile-monitor-result{
+  margin-top:10px;padding:10px;border-radius:9px;background:#f6faf8
+}
+.mobile-monitor-result.pending{color:#84938c;font-size:9px;line-height:1.4}
+.mobile-monitor-result strong{display:block;margin-top:3px;color:#2d674e;font-size:12px}
+.mobile-monitor-result>span{display:block;margin-top:4px;color:#6f8279;font-size:9px}
+.mobile-full-action{width:100%;margin-top:9px;min-height:38px}
+.mobile-range-days{margin-top:9px;display:grid;gap:6px}
+.mobile-range-day{display:grid;grid-template-columns:92px minmax(0,1fr);gap:8px;align-items:center;padding:7px 8px;border-radius:8px;background:#f8faf9}
+.mobile-range-day>div:first-child strong{display:block;font-size:9px;color:#50675c}
+.mobile-range-day>div:first-child small{display:block;margin-top:2px;font-size:7.5px;color:#8e9a94}
+.mobile-range-result span{display:block;font-size:9.5px;color:#2d684f;font-weight:850}
+.mobile-range-result small{display:block;margin-top:2px;font-size:8px;color:#788980}
+.mobile-range-empty{color:#a0aba6;text-align:right}
+.mobile-report-head .mobile-report-count{background:#edf7f1;color:#397257}
+.mobile-report-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.mobile-report-grid>div{padding:8px;border-radius:8px;background:#f7faf8}
+.mobile-report-grid small{display:block;font-size:7.5px;letter-spacing:.06em;color:#8a9891;font-weight:900}
+.mobile-report-grid b{display:block;margin-top:3px;font-size:9.5px;color:#4e675d;line-height:1.35}
+.mobile-report-grid b.wrap{white-space:normal;font-weight:700}
+
+@media(max-width:720px){
+  #page-monitoring .monitoring-filters,
+  #page-laporan .laporan-filters{
+    display:grid!important;
+    grid-template-columns:1fr 1fr!important;
+    gap:8px!important;
+  }
+  #page-monitoring .monitoring-filter,
+  #page-laporan .laporan-filter{
+    min-width:0!important;
+  }
+  #page-monitoring .monitoring-search{
+    grid-column:1/-1;
+  }
+  #page-monitoring .monitoring-tabs{
+    overflow-x:auto;
+    padding:7px 7px 0;
+  }
+  #page-monitoring .monitoring-tab{
+    min-width:150px;
+    padding:9px 10px 10px;
+  }
+  #page-monitoring .monitoring-panel{
+    padding:10px 9px 12px;
+  }
+  #page-monitoring .monitoring-table-wrap,
+  #page-laporan .laporan-table-wrap{
+    display:none!important;
+  }
+  #page-monitoring #monitoringCurrentMobile,
+  #page-monitoring #monitoringRangeMobile,
+  #page-laporan #laporanSiswaMobile{
+    display:block!important;
+  }
+  #page-monitoring .monitoring-table-head{
+    display:block;
+  }
+  #page-monitoring .legend-inline{
+    justify-content:flex-start;
+    margin-top:8px;
+  }
+  #page-monitoring .monitoring-stats,
+  #page-laporan .laporan-stats{
+    grid-template-columns:1fr 1fr!important;
+  }
+  #page-laporan .grid-main{
+    grid-template-columns:1fr!important;
+  }
+  #page-laporan .laporan-grid{
+    margin-top:9px;
+  }
+  #page-laporan .card{
+    margin-bottom:9px;
+  }
+  #page-laporan .compact-card{
+    padding:9px;
+  }
+  #page-laporan .laporan-concept-grid{
+    grid-template-columns:1fr!important;
+  }
+}
+@media(min-width:721px){
+  #monitoringCurrentMobile,#monitoringRangeMobile,#laporanSiswaMobile{display:none!important}
+}
+
+/* V64 — Keep Monitoring & Laporan tables visible on mobile */
+@media (max-width:720px){
+  #page-monitoring .monitoring-table-wrap,
+  #page-laporan .laporan-table-wrap{
+    display:block!important;
+    width:100%;
+    max-width:100%;
+    overflow-x:auto!important;
+    overflow-y:visible;
+    -webkit-overflow-scrolling:touch;
+  }
+
+  #page-monitoring .monitoring-current-table,
+  #page-monitoring .monitoring-range-table,
+  #page-laporan .laporan-table{
+    display:table!important;
+  }
+
+  #page-monitoring .mobile-monitoring-list,
+  #page-laporan .mobile-laporan-list{
+    display:none!important;
+  }
+
+  #page-monitoring .monitoring-current-table{
+    min-width:900px!important;
+  }
+
+  #page-monitoring .monitoring-range-table{
+    min-width:720px!important;
+  }
+
+  #page-laporan .laporan-table{
+    min-width:980px!important;
+  }
+
+  #page-monitoring .monitoring-table-head{
+    margin-bottom:8px;
+  }
+
+  #page-monitoring .spreadsheet-table th,
+  #page-monitoring .spreadsheet-table td,
+  #page-laporan .spreadsheet-table th,
+  #page-laporan .spreadsheet-table td{
+    font-size:10px!important;
+    padding:8px 9px!important;
+  }
+
+  #page-monitoring .sticky-nis{
+    left:0!important;
+    min-width:74px;
+  }
+
+  #page-monitoring .sticky-name{
+    left:74px!important;
+    min-width:150px;
+  }
+
+  #page-monitoring .monitoring-panel{
+    padding-left:7px!important;
+    padding-right:7px!important;
+  }
+
+  #page-laporan .compact-card{
+    padding:9px!important;
+  }
+}
+
+/* V65 — Refined mobile Monitoring & Laporan */
+@media (max-width:720px){
+
+  /* Keep the table, but make the mobile table intentionally compact and readable. */
+  .mobile-table-shell{
+    border-radius:12px!important;
+    margin-left:0!important;
+    margin-right:0!important;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:thin;
+    box-shadow:inset 0 0 0 1px #e6eeea;
+  }
+
+  /* Monitoring current table */
+  #page-monitoring .monitoring-current-table{
+    min-width:930px!important;
+    table-layout:fixed!important;
+  }
+  #page-monitoring .monitoring-current-table th:nth-child(1),
+  #page-monitoring .monitoring-current-table td:nth-child(1){
+    width:82px!important;
+  }
+  #page-monitoring .monitoring-current-table th:nth-child(2),
+  #page-monitoring .monitoring-current-table td:nth-child(2){
+    width:165px!important;
+  }
+  #page-monitoring .monitoring-current-table th:nth-child(3),
+  #page-monitoring .monitoring-current-table td:nth-child(3){
+    width:60px!important;
+  }
+  #page-monitoring .monitoring-current-table th:nth-child(4),
+  #page-monitoring .monitoring-current-table td:nth-child(4){
+    width:115px!important;
+  }
+  #page-monitoring .monitoring-current-table th:nth-child(5),
+  #page-monitoring .monitoring-current-table td:nth-child(5){
+    width:155px!important;
+  }
+  #page-monitoring .monitoring-current-table th:nth-child(6),
+  #page-monitoring .monitoring-current-table td:nth-child(6){
+    width:90px!important;
+  }
+  #page-monitoring .monitoring-current-table th:nth-child(7),
+  #page-monitoring .monitoring-current-table td:nth-child(7){
+    width:115px!important;
+  }
+  #page-monitoring .monitoring-current-table th:nth-child(8),
+  #page-monitoring .monitoring-current-table td:nth-child(8){
+    width:125px!important;
+  }
+
+  #page-monitoring .monitoring-current-table th,
+  #page-monitoring .monitoring-current-table td{
+    height:50px!important;
+    padding:8px 9px!important;
+    font-size:10px!important;
+  }
+  #page-monitoring .monitoring-current-table th{
+    font-size:8px!important;
+    letter-spacing:.06em;
+  }
+  #page-monitoring .monitoring-current-table .sticky-nis{
+    left:0!important;
+    width:82px!important;
+    min-width:82px!important;
+    max-width:82px!important;
+    z-index:13!important;
+    box-shadow:1px 0 0 #e7eeea;
+  }
+  #page-monitoring .monitoring-current-table .sticky-name{
+    left:82px!important;
+    width:165px!important;
+    min-width:165px!important;
+    max-width:165px!important;
+    z-index:13!important;
+    box-shadow:2px 0 0 #e7eeea;
+  }
+  #page-monitoring .monitoring-current-table .student-name-cell{
+    overflow:hidden!important;
+    text-overflow:ellipsis!important;
+    white-space:nowrap!important;
+  }
+  #page-monitoring .monitoring-current-table .monitor-setoran-detail strong{
+    display:block;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+  }
+
+  /* Monitoring historical/range table */
+  #page-monitoring .monitoring-range-table{
+    min-width:760px!important;
+    table-layout:fixed!important;
+  }
+  #page-monitoring .monitoring-range-table th:nth-child(1),
+  #page-monitoring .monitoring-range-table td:nth-child(1){
+    width:82px!important;
+  }
+  #page-monitoring .monitoring-range-table th:nth-child(2),
+  #page-monitoring .monitoring-range-table td:nth-child(2){
+    width:165px!important;
+  }
+  #page-monitoring .monitoring-range-table th:nth-child(3),
+  #page-monitoring .monitoring-range-table td:nth-child(3){
+    width:60px!important;
+  }
+  #page-monitoring .monitoring-range-table .sticky-nis{
+    left:0!important;width:82px!important;min-width:82px!important;max-width:82px!important;
+    box-shadow:1px 0 0 #e7eeea;
+  }
+  #page-monitoring .monitoring-range-table .sticky-name{
+    left:82px!important;width:165px!important;min-width:165px!important;max-width:165px!important;
+    box-shadow:2px 0 0 #e7eeea;
+  }
+  #page-monitoring .monitoring-range-table th,
+  #page-monitoring .monitoring-range-table td{
+    padding:7px 8px!important;
+    font-size:9px!important;
+  }
+
+  /* Monitoring header/filtres: reduce vertical bulk. */
+  #page-monitoring .compact-head h1,
+  #page-laporan .compact-head h1{font-size:22px!important}
+  #page-monitoring .compact-head p,
+  #page-laporan .compact-head p{font-size:10px!important;line-height:1.45}
+  #page-monitoring .monitoring-filter-card,
+  #page-laporan .laporan-filter-card{
+    padding:10px!important;
+  }
+  #page-monitoring .monitoring-stats,
+  #page-laporan .laporan-stats{
+    gap:7px!important;
+  }
+  #page-monitoring .monitoring-stats .stat,
+  #page-laporan .laporan-stats .stat{
+    padding:9px!important;
+    min-height:74px;
+  }
+  #page-monitoring .monitoring-stats .stat .n,
+  #page-laporan .laporan-stats .stat .n{
+    font-size:20px!important;
+  }
+
+  /* Monitoring tabs */
+  #page-monitoring .monitoring-tabs{
+    display:grid!important;
+    grid-template-columns:1fr 1fr!important;
+    overflow:visible!important;
+    gap:5px!important;
+    padding:7px!important;
+    border-bottom:0!important;
+  }
+  #page-monitoring .monitoring-tab{
+    min-width:0!important;
+    width:100%!important;
+    border-radius:9px!important;
+    padding:8px 8px 9px!important;
+  }
+  #page-monitoring .monitoring-tab-title{font-size:10px!important}
+  #page-monitoring .monitoring-tab-sub{font-size:7.5px!important}
+  #page-monitoring .monitoring-tab.active::after{display:none}
+
+  /* Laporan table */
+  #page-laporan .laporan-table{
+    min-width:1000px!important;
+    table-layout:fixed!important;
+  }
+  #page-laporan .laporan-table th:nth-child(1),
+  #page-laporan .laporan-table td:nth-child(1){width:80px!important}
+  #page-laporan .laporan-table th:nth-child(2),
+  #page-laporan .laporan-table td:nth-child(2){width:170px!important}
+  #page-laporan .laporan-table th:nth-child(3),
+  #page-laporan .laporan-table td:nth-child(3){width:60px!important}
+  #page-laporan .laporan-table th:nth-child(4),
+  #page-laporan .laporan-table td:nth-child(4){width:80px!important}
+  #page-laporan .laporan-table th:nth-child(5),
+  #page-laporan .laporan-table td:nth-child(5){width:100px!important}
+  #page-laporan .laporan-table th:nth-child(6),
+  #page-laporan .laporan-table td:nth-child(6){width:140px!important}
+  #page-laporan .laporan-table th:nth-child(7),
+  #page-laporan .laporan-table td:nth-child(7){width:70px!important}
+  #page-laporan .laporan-table th:nth-child(8),
+  #page-laporan .laporan-table td:nth-child(8){width:100px!important}
+  #page-laporan .laporan-table th:nth-child(9),
+  #page-laporan .laporan-table td:nth-child(9){width:220px!important}
+
+  #page-laporan .laporan-table th,
+  #page-laporan .laporan-table td{
+    padding:8px 9px!important;
+    font-size:9.5px!important;
+  }
+  #page-laporan .laporan-table th{
+    font-size:8px!important;
+    letter-spacing:.05em;
+  }
+
+  /* Laporan class summaries look like tidy cards. */
+  #page-laporan .lap-kelas-item{
+    padding:9px 10px!important;
+  }
+  #page-laporan .lap-kelas-line{
+    grid-template-columns:repeat(3,1fr)!important;
+    gap:6px!important;
+  }
+
+  /* On small phones, let the table breathe horizontally instead of clipping text. */
+  #page-monitoring .mobile-table-shell,
+  #page-laporan .mobile-table-shell{
+    max-width:100%!important;
+    overflow-x:auto!important;
+  }
+}
+
+/* V66 — Monitoring mobile: only NIS stays sticky */
+@media (max-width:720px){
+  #page-monitoring .monitoring-current-table .sticky-name,
+  #page-monitoring .monitoring-range-table .sticky-name{
+    position:static!important;
+    left:auto!important;
+    z-index:1!important;
+    box-shadow:none!important;
+    width:auto!important;
+    min-width:150px!important;
+  }
+
+  #page-monitoring .monitoring-current-table .sticky-nis,
+  #page-monitoring .monitoring-range-table .sticky-nis{
+    position:sticky!important;
+    left:0!important;
+    z-index:12!important;
+    width:58px!important;
+    min-width:58px!important;
+    max-width:58px!important;
+  }
+
+  #page-monitoring .monitoring-current-table{
+    min-width:760px!important;
+  }
+
+  #page-monitoring .monitoring-range-table{
+    min-width:680px!important;
+  }
+
+  #page-monitoring .monitoring-current-table th,
+  #page-monitoring .monitoring-current-table td,
+  #page-monitoring .monitoring-range-table th,
+  #page-monitoring .monitoring-range-table td{
+    font-size:9px!important;
+    padding:7px 8px!important;
+  }
+
+  #page-monitoring .monitoring-current-table th:nth-child(2),
+  #page-monitoring .monitoring-current-table td:nth-child(2){
+    min-width:145px!important;
+    width:145px!important;
+  }
+
+  #page-monitoring .monitoring-range-table th:nth-child(2),
+  #page-monitoring .monitoring-range-table td:nth-child(2){
+    min-width:145px!important;
+    width:145px!important;
+  }
+
+  /* Do not apply the wide desktop sticky offset to later columns. */
+  #page-monitoring .monitoring-current-table .sticky-name,
+  #page-monitoring .monitoring-range-table .sticky-name{
+    background:#fff!important;
+  }
+
+  #page-monitoring .monitoring-current-table th.sticky-name,
+  #page-monitoring .monitoring-range-table th.sticky-name{
+    background:#f8fbf9!important;
+  }
+}
+
+/* V67 — Laporan mobile horizontal table scrolling */
+@media (max-width:720px){
+  #page-laporan .laporan-table-wrap{
+    display:block!important;
+    width:100%!important;
+    max-width:100%!important;
+    min-width:0!important;
+    overflow-x:auto!important;
+    overflow-y:hidden!important;
+    -webkit-overflow-scrolling:touch!important;
+    touch-action:pan-x!important;
+    overscroll-behavior-x:contain;
+    scrollbar-width:thin;
+  }
+
+  #page-laporan .laporan-table-wrap .laporan-table{
+    display:table!important;
+    width:max-content!important;
+    min-width:980px!important;
+    max-width:none!important;
+    table-layout:auto!important;
+  }
+
+  #page-laporan .laporan-table-wrap .laporan-table th,
+  #page-laporan .laporan-table-wrap .laporan-table td{
+    white-space:nowrap!important;
+  }
+
+  #page-laporan .laporan-table-wrap .laporan-table th:nth-child(2),
+  #page-laporan .laporan-table-wrap .laporan-table td:nth-child(2){
+    min-width:150px!important;
+  }
+
+  #page-laporan .laporan-table-wrap .laporan-table th:nth-child(9),
+  #page-laporan .laporan-table-wrap .laporan-table td:nth-child(9){
+    min-width:250px!important;
+  }
+
+  #page-laporan .laporan-table-wrap::after{
+    content:"Geser ke samping untuk melihat kolom lainnya →";
+    display:block;
+    padding:6px 9px;
+    font-size:8px;
+    color:#8b9791;
+    background:#f7faf8;
+    border-top:1px dashed #e1e9e4;
+    text-align:right;
+    white-space:nowrap;
+  }
+}
+
+/* V68 — Mobile bottom navigation no longer covers report/table content */
+@media (max-width:720px){
+  .content{
+    padding-bottom:155px!important;
+  }
+
+  .sidebar{
+    min-height:96px!important;
+    padding-bottom:8px!important;
+  }
+
+  /* Keep the last report cards/table rows clear of the fixed nav. */
+  #page-laporan{
+    padding-bottom:34px!important;
+  }
+  #page-monitoring{
+    padding-bottom:34px!important;
+  }
+
+  #page-laporan .laporan-table-wrap{
+    margin-bottom:12px!important;
+  }
+
+  /* Give the horizontal report table a little breathing room above the nav. */
+  #page-laporan .laporan-table-wrap::after{
+    margin-bottom:2px;
+  }
+}
+
+/* V69 — Laporan mobile: prevent page-wide overflow, keep cards fluid,
+   and make only the table area horizontally scrollable. */
+@media (max-width:720px){
+  html, body{
+    max-width:100%;
+    overflow-x:hidden!important;
+  }
+
+  .content,
+  .page,
+  #page-laporan,
+  #page-laporan .grid-main,
+  #page-laporan .laporan-grid,
+  #page-laporan .laporan-grid > *,
+  #page-laporan .card,
+  #page-laporan .compact-card{
+    min-width:0!important;
+    width:100%;
+    max-width:100%;
+  }
+
+  #page-laporan .laporan-filter-card{
+    box-sizing:border-box;
+    overflow:hidden;
+  }
+
+  #page-laporan .laporan-filters{
+    grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;
+    width:100%!important;
+  }
+
+  #page-laporan .laporan-filter{
+    min-width:0!important;
+    max-width:100%!important;
+  }
+
+  #page-laporan .laporan-filter .input{
+    width:100%!important;
+    min-width:0!important;
+    box-sizing:border-box;
+  }
+
+  #page-laporan .laporan-stats{
+    width:100%!important;
+    max-width:100%!important;
+    grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;
+  }
+
+  #page-laporan .laporan-stats .stat{
+    min-width:0!important;
+    overflow:hidden;
+  }
+
+  #page-laporan .laporan-stats .stat > div:last-child{
+    min-width:0!important;
+  }
+
+  #page-laporan .laporan-grid{
+    display:grid!important;
+    grid-template-columns:minmax(0,1fr)!important;
+    gap:9px!important;
+  }
+
+  #page-laporan .laporan-grid > div{
+    min-width:0!important;
+    width:100%!important;
+  }
+
+  #page-laporan .laporan-grid .card{
+    overflow:hidden;
+    box-sizing:border-box;
+  }
+
+  /* The report table gets its own scroll viewport. The page itself does not. */
+  #page-laporan .laporan-table-wrap{
+    display:block!important;
+    position:relative!important;
+    width:100%!important;
+    max-width:100%!important;
+    min-width:0!important;
+    box-sizing:border-box!important;
+    overflow-x:auto!important;
+    overflow-y:hidden!important;
+    overscroll-behavior-x:contain;
+    -webkit-overflow-scrolling:touch;
+    touch-action:pan-x;
+    scrollbar-width:thin;
+    border-radius:10px;
+  }
+
+  #page-laporan .laporan-table-wrap .laporan-table{
+    display:table!important;
+    width:max-content!important;
+    min-width:980px!important;
+    max-width:none!important;
+    table-layout:auto!important;
+    margin:0!important;
+  }
+
+  #page-laporan .laporan-table-wrap .laporan-table th,
+  #page-laporan .laporan-table-wrap .laporan-table td{
+    white-space:nowrap!important;
+    overflow:hidden;
+    text-overflow:ellipsis;
+  }
+
+  #page-laporan .laporan-table-wrap .laporan-table th:nth-child(1),
+  #page-laporan .laporan-table-wrap .laporan-table td:nth-child(1){min-width:70px!important}
+  #page-laporan .laporan-table-wrap .laporan-table th:nth-child(2),
+  #page-laporan .laporan-table-wrap .laporan-table td:nth-child(2){min-width:150px!important}
+  #page-laporan .laporan-table-wrap .laporan-table th:nth-child(3),
+  #page-laporan .laporan-table-wrap .laporan-table td:nth-child(3){min-width:58px!important}
+  #page-laporan .laporan-table-wrap .laporan-table th:nth-child(4),
+  #page-laporan .laporan-table-wrap .laporan-table td:nth-child(4){min-width:72px!important}
+  #page-laporan .laporan-table-wrap .laporan-table th:nth-child(5),
+  #page-laporan .laporan-table-wrap .laporan-table td:nth-child(5){min-width:96px!important}
+  #page-laporan .laporan-table-wrap .laporan-table th:nth-child(6),
+  #page-laporan .laporan-table-wrap .laporan-table td:nth-child(6){min-width:130px!important}
+  #page-laporan .laporan-table-wrap .laporan-table th:nth-child(7),
+  #page-laporan .laporan-table-wrap .laporan-table td:nth-child(7){min-width:60px!important}
+  #page-laporan .laporan-table-wrap .laporan-table th:nth-child(8),
+  #page-laporan .laporan-table-wrap .laporan-table td:nth-child(8){min-width:92px!important}
+  #page-laporan .laporan-table-wrap .laporan-table th:nth-child(9),
+  #page-laporan .laporan-table-wrap .laporan-table td:nth-child(9){min-width:240px!important}
+
+  #page-laporan .laporan-table-wrap::after{
+    content:"← Geser tabel →";
+    display:block!important;
+    position:sticky;
+    left:0;
+    width:100%;
+    box-sizing:border-box;
+    padding:6px 8px;
+    border-top:1px dashed #e1e9e4;
+    background:#f7faf8;
+    color:#88968f;
+    text-align:center;
+    font-size:8px;
+    white-space:nowrap;
+  }
+
+  /* Compact class summary cards on phones. */
+  #page-laporan .lap-kelas-list{
+    display:grid!important;
+    grid-template-columns:minmax(0,1fr)!important;
+    gap:7px!important;
+  }
+
+  #page-laporan .lap-kelas-item{
+    min-width:0!important;
+    width:100%!important;
+    box-sizing:border-box;
+    padding:10px!important;
+  }
+
+  #page-laporan .lap-kelas-top{
+    align-items:center;
+  }
+
+  #page-laporan .lap-kelas-line{
+    display:grid!important;
+    grid-template-columns:repeat(3,minmax(0,1fr))!important;
+    gap:5px!important;
+  }
+
+  #page-laporan .laporan-note-list{
+    min-width:0!important;
+  }
+
+  #page-laporan .lap-note-item{
+    min-width:0!important;
+    overflow:hidden;
+  }
+
+  #page-laporan .laporan-concept-grid{
+    display:grid!important;
+    grid-template-columns:minmax(0,1fr)!important;
+    gap:7px!important;
+  }
+
+  #page-laporan .laporan-concept-grid > div{
+    min-width:0!important;
+  }
+
+  #page-laporan .laporan-period-info{
+    min-width:0!important;
+    max-width:100%;
+    overflow:hidden;
+    text-overflow:ellipsis;
+  }
+}
+
+/* V70 — Rapor preview remains a paper canvas on mobile */
+.rapor-preview{
+  overflow:auto;
+  -webkit-overflow-scrolling:touch;
+  justify-content:center;
+}
+
+.rapor-paper-A4{
+  width:210mm!important;
+  min-width:210mm!important;
+  max-width:none!important;
+  min-height:297mm!important;
+  box-sizing:border-box!important;
+}
+
+.rapor-paper-F4{
+  width:215.9mm!important;
+  min-width:215.9mm!important;
+  max-width:none!important;
+  min-height:330.2mm!important;
+  box-sizing:border-box!important;
+}
+
+@media(max-width:720px){
+  /* The surrounding page is responsive, but the report preview itself is
+     intentionally not. It represents the printed sheet. */
+  #page-rapor .rapor-preview{
+    display:block!important;
+    width:100%!important;
+    max-width:100%!important;
+    overflow-x:auto!important;
+    overflow-y:hidden!important;
+    padding:10px!important;
+    box-sizing:border-box!important;
+    justify-content:flex-start!important;
+    touch-action:pan-x!important;
+    overscroll-behavior-x:contain;
+    background:#eef2f0!important;
+  }
+
+  #page-rapor .rapor-preview .rapor-paper,
+  #raporBatchReviewModal .rapor-batch-review-paper .rapor-paper{
+    flex:0 0 auto!important;
+    width:210mm!important;
+    min-width:210mm!important;
+    max-width:none!important;
+    min-height:297mm!important;
+    padding:34px 38px!important;
+    box-sizing:border-box!important;
+    transform:none!important;
+    zoom:1!important;
+  }
+
+  #page-rapor .rapor-preview .rapor-paper.rapor-paper-F4,
+  #raporBatchReviewModal .rapor-batch-review-paper .rapor-paper.rapor-paper-F4{
+    width:215.9mm!important;
+    min-width:215.9mm!important;
+    min-height:330.2mm!important;
+  }
+
+  /* Undo mobile collapse inside the paper itself. */
+  #page-rapor .rapor-paper .rapor-identity-grid,
+  #raporBatchReviewModal .rapor-paper .rapor-identity-grid{
+    grid-template-columns:2fr 1fr 1fr!important;
+  }
+
+  #page-rapor .rapor-paper .rapor-metric-grid,
+  #raporBatchReviewModal .rapor-paper .rapor-metric-grid{
+    grid-template-columns:repeat(4,1fr)!important;
+  }
+
+  #page-rapor .rapor-paper .rapor-signature-grid,
+  #raporBatchReviewModal .rapor-paper .rapor-signature-grid{
+    grid-template-columns:1fr 1fr!important;
+  }
+
+  #page-rapor .rapor-paper .rapor-logo,
+  #raporBatchReviewModal .rapor-paper .rapor-logo{
+    width:58px!important;
+    height:58px!important;
+  }
+
+  #page-rapor .rapor-paper .rapor-school{
+    font-size:14px!important;
+  }
+
+  #page-rapor .rapor-paper .rapor-title{
+    font-size:18px!important;
+  }
+}
+
+/* V71 — Juziyah certificate preview follows A4 paper size */
+.juziyah-certificate-preview{
+  overflow:auto!important;
+  -webkit-overflow-scrolling:touch;
+  justify-content:center;
+  touch-action:pan-x pan-y;
+}
+.juziyah-certificate-paper{
+  width:210mm!important;
+  min-width:210mm!important;
+  max-width:none!important;
+  min-height:297mm!important;
+  box-sizing:border-box!important;
+  padding:45px 50px!important;
+  flex:0 0 auto!important;
+}
+@media(max-width:720px){
+  #juziyahCertificatePreviewModal .juziyah-certificate-preview{
+    display:block!important;
+    width:100%!important;
+    max-width:100%!important;
+    overflow-x:auto!important;
+    overflow-y:hidden!important;
+    box-sizing:border-box!important;
+    padding:10px!important;
+    background:#eef2f0!important;
+    justify-content:flex-start!important;
+    touch-action:pan-x!important;
+    overscroll-behavior-x:contain;
+  }
+  #juziyahCertificatePreviewModal .juziyah-certificate-paper{
+    width:210mm!important;
+    min-width:210mm!important;
+    max-width:none!important;
+    min-height:297mm!important;
+    padding:45px 50px!important;
+    box-sizing:border-box!important;
+    transform:none!important;
+    zoom:1!important;
+  }
+
+  /* Keep the certificate typography as the printed version, not a mobile card. */
+  #juziyahCertificatePreviewModal .jcp-school{font-size:15px!important}
+  #juziyahCertificatePreviewModal .jcp-title{font-size:25px!important}
+  #juziyahCertificatePreviewModal .jcp-name{font-size:24px!important}
+  #juziyahCertificatePreviewModal .jcp-juz{font-size:22px!important}
+  #juziyahCertificatePreviewModal .jcp-sign{
+    grid-template-columns:1fr 1fr!important;
+    gap:60px!important;
+  }
+  #juziyahCertificatePreviewModal .juziyah-certificate-paper img{
+    width:70px!important;
+    height:70px!important;
+  }
+
+  #juziyahCertificatePreviewModal .juziyah-certificate-preview::after{
+    content:"← Geser untuk melihat seluruh sertifikat A4 →";
+    display:block!important;
+    width:210mm;
+    box-sizing:border-box;
+    padding:6px 8px;
+    margin-top:6px;
+    background:#f7faf8;
+    color:#8a9791;
+    font-size:8px;
+    text-align:center;
+    white-space:nowrap;
+  }
+}
+
+/* V72 — Teacher motivation mobile footer/button visibility */
+@media (max-width:620px){
+  #teacherMotivationModal .teacher-motivation-modal{
+    max-height:calc(100dvh - 20px)!important;
+    overflow-y:auto!important;
+    overflow-x:hidden!important;
+    box-sizing:border-box;
+    scrollbar-width:thin;
+  }
+
+  #teacherMotivationModal .teacher-motivation-top{
+    padding:18px 20px 5px!important;
+  }
+
+  #teacherMotivationModal .teacher-motivation-icon{
+    width:46px!important;
+    height:46px!important;
+    margin-bottom:8px!important;
+  }
+
+  #teacherMotivationModal .teacher-motivation-type{
+    margin-top:8px!important;
+  }
+
+  #teacherMotivationModal .teacher-motivation-text{
+    padding:8px 18px 0!important;
+    font-size:17px!important;
+    line-height:1.55!important;
+  }
+
+  #teacherMotivationModal .teacher-motivation-source{
+    padding-top:7px!important;
+  }
+
+  #teacherMotivationModal .teacher-motivation-message{
+    margin:16px 14px 0!important;
+    padding:12px 13px!important;
+    font-size:10px!important;
+    line-height:1.55!important;
+  }
+
+  #teacherMotivationModal .teacher-motivation-footer{
+    position:sticky;
+    bottom:0;
+    z-index:2;
+    flex-direction:column!important;
+    align-items:stretch!important;
+    gap:8px!important;
+    margin-top:14px!important;
+    padding:10px 14px!important;
+    background:rgba(255,255,255,.98)!important;
+    box-shadow:0 -5px 14px rgba(25,56,43,.06);
+  }
+
+  #teacherMotivationModal .teacher-motivation-brand{
+    text-align:center!important;
+  }
+
+  #teacherMotivationModal .teacher-motivation-footer .btn{
+    display:flex!important;
+    width:100%!important;
+    min-height:42px!important;
+    align-items:center!important;
+    justify-content:center!important;
+    opacity:1!important;
+    visibility:visible!important;
+  }
+}

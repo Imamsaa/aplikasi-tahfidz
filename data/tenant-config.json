@@ -1,0 +1,25 @@
+{
+  "tenantId": "alfirdaus-demo",
+  "productName": "Bina Tahfidz",
+  "programName": "Tahfidz",
+  "schoolName": "SMPIT Al Firdaus Purwodadi",
+  "schoolShortName": "SMPIT Al Firdaus",
+  "portalName": "Portal Wali Murid",
+  "internalTagline": "Kelola data siswa, setoran, catatan, monitoring, dan perkembangan hafalan.",
+  "parentTagline": "Pantau setoran dan catatan pembinaan hafalan siswa.",
+  "logo": "../assets/tenant-logo.png",
+  "footerText": "Bina Tahfidz · SMPIT Al Firdaus Purwodadi",
+  "theme": {
+    "primary": "#087443",
+    "primaryDark": "#075b36",
+    "primaryLight": "#eaf6ef",
+    "gold": "#c9a45b",
+    "pageBackground": "#f4f8f5"
+  },
+  "features": {
+    "juziyah": true,
+    "rapor": true,
+    "laporan": true,
+    "monitoring": true
+  }
+}

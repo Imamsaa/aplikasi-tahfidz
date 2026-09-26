@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Portal Wali Murid</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="searchScreen" class="screen search-screen">
+  <div class="search-shell">
+    <div class="brand-lockup">
+      <div class="brand-logo-wrap">
+        <img data-brand-logo src="../assets/tenant-logo.png" alt="Logo sekolah">
+      </div>
+      <div class="eyebrow">PORTAL WALI MURID</div>
+      <h1 data-brand-product>Bina Tahfidz</h1>
+      <p data-brand-parent-tagline>Pantau setoran dan catatan pembinaan hafalan siswa.</p>
+    </div>
+
+    <div class="login-card">
+      <div class="login-label">Masukkan NIS Siswa</div>
+      <div class="search-row">
+        <div class="input-wrap">
+          <span class="input-icon">⌕</span>
+          <input id="nisInput" class="text-input" type="text" inputmode="numeric" autocomplete="off"
+                 placeholder="Contoh: 260001" aria-label="NIS siswa">
+        </div>
+        <button id="searchBtn" class="btn btn-primary">Lihat Perkembangan</button>
+      </div>
+      <div id="searchError" class="error-box hidden"></div>
+      <div class="login-hint">Masukkan NIS siswa. Orang tua tidak perlu membuat username atau password.</div>
+    </div>
+
+    <div class="safe-note">
+      <span class="safe-icon">✓</span>
+      <div>
+        <strong>Informasi untuk orang tua</strong>
+        <p>Portal ini hanya menampilkan data pembinaan hafalan yang dibagikan untuk keperluan pendampingan.</p>
+      </div>
+    </div>
+
+    <div class="search-footer">
+      <span data-brand-footer>Bina Tahfidz · Sekolah</span>
+    </div>
+  </div>
+</div>
+
+<div id="appScreen" class="app-screen hidden">
+  <header class="parent-topbar">
+    <div class="topbar-brand">
+      <img data-brand-logo src="../assets/tenant-logo.png" alt="Logo sekolah">
+      <div>
+        <strong data-brand-product>Bina Tahfidz</strong>
+        <small data-brand-school>Sekolah</small>
+      </div>
+    </div>
+    <div class="topbar-actions">
+      <button id="refreshBtn" class="icon-btn" title="Perbarui data" aria-label="Perbarui data">
+      <svg viewBox="0 0 24 24"><path d="M20 11a8 8 0 0 0-14.8-4"/><path d="M4 4v5h5"/><path d="M4 13a8 8 0 0 0 14.8 4"/><path d="M20 20v-5h-5"/></svg>
+    </button>
+      <button id="changeStudentBtn" class="outline-btn">
+      <svg viewBox="0 0 24 24"><path d="M16 3h5v5"/><path d="M21 3l-7 7"/><path d="M8 21H3v-5"/><path d="m3 21 7-7"/><path d="M14 7a5 5 0 0 0-7 7"/><path d="M10 17a5 5 0 0 0 7-7"/></svg>
+      Ganti Siswa
+    </button>
+    </div>
+  </header>
+
+  <aside class="desktop-sidebar">
+    <div class="sidebar-profile">
+      <div class="sidebar-label">SISWA YANG DIPANTAU</div>
+      <div id="sideNama" class="sidebar-name">—</div>
+      <div id="sideMeta" class="sidebar-meta">—</div>
+    </div>
+
+    <nav class="side-nav">
+      <button class="side-nav-item active" data-page="beranda">
+        <span class="nav-svg" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 10.5 12 3l9 7.5"/><path d="M5.5 9.5V21h13V9.5"/><path d="M9 21v-6h6v6"/></svg></span>
+        Beranda
+      </button>
+      <button class="side-nav-item" data-page="setoran">
+        <span class="nav-svg" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 3h8.5L19 7.5V21H6z"/><path d="M14 3v5h5"/><path d="M9 12h7M9 16h7"/></svg></span>
+        Setoran
+      </button>
+      <button class="side-nav-item" data-page="perkembangan">
+        <span class="nav-svg" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 19V5"/><path d="M4 19h16"/><path d="m7 15 4-4 3 2 5-6"/></svg></span>
+        Perkembangan
+      </button>
+      <button class="side-nav-item" data-page="catatan">
+        <span class="nav-svg" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 4h14v13H8l-3 3z"/><path d="M8 8h8M8 12h6"/></svg></span>
+        Catatan
+      </button>
+      <button class="side-nav-item" data-page="juziyah">
+        <span class="nav-svg" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m12 3 2.2 4.8L19 9l-3.3 3.2.8 4.8-4.5-2.3L7.5 17l.8-4.8L5 9l4.8-1.2z"/><path d="M9 19h6"/></svg></span>
+        Juziyah
+      </button>
+    </nav>
+
+    <div class="sidebar-note">
+      <strong>Pendampingan orang tua</strong>
+      <p>Gunakan catatan dan riwayat setoran sebagai bahan mendampingi hafalan anak di rumah.</p>
+    </div>
+  </aside>
+
+  <main class="parent-main">
+    <div id="page-beranda" class="parent-page active"></div>
+    <div id="page-setoran" class="parent-page"></div>
+    <div id="page-perkembangan" class="parent-page"></div>
+    <div id="page-catatan" class="parent-page"></div>
+    <div id="page-juziyah" class="parent-page"></div>
+  </main>
+
+  <nav class="mobile-bottom-nav">
+    <button class="mobile-nav-item active" data-page="beranda">
+      <span class="nav-svg" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 10.5 12 3l9 7.5"/><path d="M5.5 9.5V21h13V9.5"/><path d="M9 21v-6h6v6"/></svg></span><small>Beranda</small>
+    </button>
+    <button class="mobile-nav-item" data-page="setoran">
+      <span class="nav-svg" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 3h8.5L19 7.5V21H6z"/><path d="M14 3v5h5"/><path d="M9 12h7M9 16h7"/></svg></span><small>Setoran</small>
+    </button>
+    <button class="mobile-nav-item" data-page="perkembangan">
+      <span class="nav-svg" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 19V5"/><path d="M4 19h16"/><path d="m7 15 4-4 3 2 5-6"/></svg></span><small>Perkembangan</small>
+    </button>
+    <button class="mobile-nav-item" data-page="catatan">
+      <span class="nav-svg" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 4h14v13H8l-3 3z"/><path d="M8 8h8M8 12h6"/></svg></span><small>Catatan</small>
+    </button>
+    <button class="mobile-nav-item" data-page="juziyah">
+      <span class="nav-svg" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m12 3 2.2 4.8L19 9l-3.3 3.2.8 4.8-4.5-2.3L7.5 17l.8-4.8L5 9l4.8-1.2z"/><path d="M9 19h6"/></svg></span><small>Juziyah</small>
+    </button>
+  </nav>
+</div>
+
+<div id="loadingOverlay" class="loading-overlay hidden">
+  <div class="loading-card">
+    <div class="spinner"></div>
+    <strong>Memuat data...</strong>
+    <span>Sedang mengambil perkembangan siswa.</span>
+  </div>
+</div>
+
+<script type="module" src="script.js"></script>
+</body>
+</html>
