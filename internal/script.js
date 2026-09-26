@@ -23,6 +23,8 @@ const ICONS = {
   "settings": `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Z"></path><path d="M19.4 15a1.7 1.7 0 0 0 .34 1.88l.06.06-1.8 1.8-.06-.06A1.7 1.7 0 0 0 16.06 18l-.2.08a1.7 1.7 0 0 0-1.06 1.56V20h-2.55v-.36A1.7 1.7 0 0 0 11.2 18.1L11 18a1.7 1.7 0 0 0-1.88.34l-.06.06-1.8-1.8.06-.06A1.7 1.7 0 0 0 7.66 15l-.08-.2A1.7 1.7 0 0 0 6.02 13.7H5.5v-2.55h.52A1.7 1.7 0 0 0 7.58 10l.08-.2a1.7 1.7 0 0 0-.34-1.88l-.06-.06 1.8-1.8.06.06A1.7 1.7 0 0 0 11 6.46l.2-.08A1.7 1.7 0 0 0 12.26 4.8V4.5h2.55v.3a1.7 1.7 0 0 0 1.06 1.56l.2.08a1.7 1.7 0 0 0 1.88-.34l.06-.06 1.8 1.8-.06.06A1.7 1.7 0 0 0 19.4 10l.08.2a1.7 1.7 0 0 0 1.56 1.06h.46v2.55h-.46A1.7 1.7 0 0 0 19.48 15z"></path></svg>`
 };
 
+let juziyahPortalBackfillDone = false;
+
 function renderIcons() {
   document.querySelectorAll("[data-icon]").forEach(el => {
     const name = el.getAttribute("data-icon");
@@ -5039,8 +5041,6 @@ function editJuziyah(id) {
   openJuziyahModal(id);
 }
 
-async 
-let juziyahPortalBackfillDone = false;
 
 function publicJuziyahProjection(r = {}) {
   return {
